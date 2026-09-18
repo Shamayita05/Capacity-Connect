@@ -102,6 +102,10 @@ button{font-family:inherit;cursor:pointer;}
   isolation:isolate;
 }
 
+.portal-section{
+    scroll-margin-top: 90px; /* change navbar based on height  */
+}
+
 /* ==================== BUTTON 1: Explore Courses — border draw ==================== */
 .login-nav{
   background:#fff;

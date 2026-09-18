@@ -220,6 +220,17 @@ document.getElementById("year").textContent = new Date().getFullYear();
    ========================================================================= */
 const topBtn = document.querySelector(".back-to-top");
 
-topBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+if (topBtn) {
+    topBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+}
+
+
+/* =========================================================================
+NAVBAR — SIGN UP ও LOGIN বাটন
+   ========================================================================= */
+
+document.querySelector(".signup-btn").addEventListener("click", () => {
+    document.querySelector(".portal-section").scrollIntoView({ behavior: "smooth" });
 });
