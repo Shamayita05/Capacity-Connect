@@ -397,7 +397,7 @@ button{font-family:inherit;cursor:pointer;}
     font-size:13.5px;
     color:#2b5872;
     font-family:inherit;
-    padding-top:12px;   /* উপরে label বসার জায়গা */
+    padding-top:12px;   
 }
 
 .input-box label{
@@ -515,7 +515,7 @@ button{font-family:inherit;cursor:pointer;}
     margin-left:4px;
     position:relative;
 }
-/* hover এ নিচের দাগ বাম থেকে ডানে বাড়ে */
+
 .signup-text a::after{
     content:"";
     position:absolute;
@@ -579,7 +579,7 @@ button{font-family:inherit;cursor:pointer;}
     animation:arrowNudge 2.6s ease-in-out infinite;
 }
 
-/* --- 8.2 গাছ — হাওয়ায় দোলে --- */
+
 .portal-plant{
     position:absolute;
     right:80px;bottom:82px;
@@ -606,7 +606,7 @@ button{font-family:inherit;cursor:pointer;}
 .portal-plant i:nth-child(3){left:38px;top:30px;transform:rotate(40deg);animation:leafWave 3.2s ease-in-out .4s infinite}
 .portal-plant i:nth-child(4){left:2px;top:76px;transform:rotate(-25deg);animation:leafWave 3.2s ease-in-out .8s infinite}
 
-/* --- 8.3 টব --- */
+
 .pot{
     position:absolute;
     right:75px;bottom:20px;
@@ -625,7 +625,7 @@ button{font-family:inherit;cursor:pointer;}
     background:linear-gradient(90deg,#d3f1f3,#5fb2ad);
     clip-path:polygon(7% 0,93% 0,78% 100%,22% 100%);
 }
-/* টবের নিচের ছায়া */
+
 .pot::after{
     content:"";
     position:absolute;
@@ -718,7 +718,6 @@ button{font-family:inherit;cursor:pointer;}
     .portal{min-height:auto}
     .portal-form{width:100%;padding:24px 20px}
 
-    /* ছোট স্ক্রিনে art পিছনে হালকা হয়ে থাকে */
     .portal-art{width:70%;opacity:.28;clip-path:ellipse(80% 80% at 90% 40%)}
 
     .tabs{gap:6px}
