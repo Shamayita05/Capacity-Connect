@@ -115,3 +115,73 @@ loginBtn.addEventListener("click", function (e) {
     this.appendChild(ripple);
     setTimeout(() => ripple.remove(), 600); // animation শেষে মুছে ফেলা
 });
+
+/* STATICS SECTION */
+/* =========================================================================
+   01. COUNT-UP
+   HTML: <strong data-count="1250" data-suffix="+">
+   easeOutExpo ব্যবহার করা হয়েছে — শুরুতে দ্রুত, শেষে ধীরে থামে
+   ========================================================================= */
+function countUp(el){
+    const target   = parseInt(el.dataset.count, 10) || 0;
+    const suffix   = el.dataset.suffix || "";
+    const duration = 1600;                 // মোট কত মিলিসেকেন্ড ধরে গুনবে
+    const start    = performance.now();
+
+    function step(now){
+        const progress = Math.min((now - start) / duration, 1);
+        const eased    = 1 - Math.pow(2, -10 * progress);   // easeOutExpo
+
+        el.textContent = Math.round(target * eased).toLocaleString("en-US") + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            el.textContent = target.toLocaleString("en-US") + suffix; // ঠিক মানে থামা
+        }
+    }
+    requestAnimationFrame(step);
+}
+
+
+/* =========================================================================
+   02. SCROLL TRIGGER
+   IntersectionObserver — কার্ডটা স্ক্রিনে দেখা গেলে একবারই গোনা চালু হয়
+   ========================================================================= */
+const numbers = document.querySelectorAll(".stat-content strong[data-count]");
+
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            countUp(entry.target);
+            obs.unobserve(entry.target);   // একবার গুনেই থেমে যাবে
+        }
+    });
+}, { threshold: 0.4 });
+
+numbers.forEach(num => observer.observe(num));
+
+
+/* =========================================================================
+   03. TILT — মাউসের অবস্থান অনুযায়ী কার্ড সামান্য হেলে যায় (3D ভাব)
+   ========================================================================= */
+const cards = document.querySelectorAll(".stat-card");
+
+cards.forEach(card => {
+
+    card.addEventListener("mousemove", function (e) {
+        const rect = this.getBoundingClientRect();
+
+        // মাঝখান থেকে মাউস কতদূর, সেটা -0.5 থেকে 0.5 এর মধ্যে
+        const x = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+
+        this.style.transform =
+            `translateY(-8px) perspective(800px) rotateX(${-y * 7}deg) rotateY(${x * 7}deg)`;
+    });
+
+    // মাউস সরে গেলে আগের জায়গায় ফেরত (CSS এর transition কাজ করবে)
+    card.addEventListener("mouseleave", function () {
+        this.style.transform = "";
+    });
+});
