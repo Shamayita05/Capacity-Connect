@@ -175,3 +175,14 @@ button{font-family:inherit;cursor:pointer;}
 .float-c{animation:floaty 5.5s ease-in-out infinite 1.2s;}
 @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
+/* ==================== NOTIFICATION ==================== */
+
+.notification{width:min(1000px,88%);height:70px;margin:27px auto 24px;border-radius:14px;background:rgb(228 243 255);display:flex;align-items:center;padding:8px 20px;border:1px solid #d7f0eb;gap:10px}
+.notification:hover{box-shadow:0 6px 18px rgba(18,58,77,.07);scale:1.05;transition-duration: 1s;cursor: pointer;}
+.bell{width:42px;font-size:25px;color:#10a99e}
+.notice-icon{width:26px;height:26px;flex-shrink:0;}
+.notice-icon svg{width:100%;height:100%;}
+.notification strong{display:block;color:#147b78;font-size:13px;margin-bottom:4px}
+.notification p{font-size:11px;color:#75919d}
+.arrow{margin-left:auto;color:#0aa69d;font-size:28px}
+
