@@ -173,3 +173,32 @@ cards.forEach(card => {
         this.style.transform = "";
     });
 });
+
+
+/* FAQ SECTION */
+/* =========================================================================
+   CAPACITY CONNECT — script.js (FAQ Section)
+   ========================================================================= */
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", function () {
+        const wasOpen = item.classList.contains("open"); 
+
+        faqItems.forEach(other => other.classList.remove("open"));
+
+        if (!wasOpen) {
+            item.classList.add("open");
+
+            setTimeout(() => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                    item.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            }, 250);
+        }
+    });
+});
