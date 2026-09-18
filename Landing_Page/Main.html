@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capacity Connect</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+<header class="navbar">
+  <a href="#" class="brand">
+
+    <span class="brand-name">
+      <span class="brand-top">CAPACITY</span>
+      <span class="brand-bottom">CONNECT</span>
+    </span>
+  </a>
+
+  <nav class="nav-menu" id="navMenu">
+    <div class="nav-buttons">
+        <button class="login-nav" type="button">
+          Explore Courses
+          <span class="line line-top"></span>
+          <span class="line line-right"></span>
+          <span class="line line-bottom"></span>
+          <span class="line line-left"></span>
+        </button>
+        <button class="signup-btn" type="button">Login / Sign Up</button>
+    </div>
+  </nav>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ==================== HERO BANNER ==================== -->
+  <section class="banner">
+    <div class="banner-inner">
+      <div class="banner-text">
+        <h1 class="banner-title">
+          <span class="title-dark">CAPACITY</span>
+          <span class="title-teal">CONNECT</span>
+        </h1>
+        <p class="banner-desc">
+          Empowering growth in<br>
+          modern description and<br>
+          achieving your goals with our platform.
+        </p>
+      </div>
+
+    <img class ="logo" src="Images\online-education.gif" alt="Online Lesson Animated Icon" width="60" height="60">
+    </div>
+  </section>
+
+<!-- ==================== NOTIFICATION ==================== -->
+
+<section class="notification">
+    <span class="notice-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6Z" fill="#1aa87c"/>
+          <path d="M10 19a2 2 0 0 0 4 0Z" fill="#1aa87c"/>
+        </svg>
+      </span>
+    <div>
+        <strong>Notifications</strong>
+        <p>Now training batch for Data Science is now available. Register before it fills up!</p>
+    </div>
+    <span class="arrow">›</span>
+</section>
+
+<!-- ======================= PORTAL SECTION ======================= -->
+    <section class="content-section portal-section">
+
+        <div class="section-title">
+            <span class="title-bar"></span>
+            <h2>Portal Section</h2>
+            <span class="title-line"></span>
+        </div>
+
+        <div class="portal">
+
+            <div class="portal-form">
+
+                <div class="tabs">
+                    <button class="tab active" type="button">Trainee</button>
+                    <button class="tab" type="button">Trainer</button>
+                    <button class="tab" type="button">Admin</button>
+                </div>
+
+                <form id="loginForm">
+
+                    <div class="input-box">
+                        <span>👤</span>
+                        <input type="text" id="username" placeholder=" " autocomplete="username">
+                        <label for="username">Username</label>
+                    </div>
+
+                    <div class="input-box">
+                        <span>🔒</span>
+                        <input type="password" id="password" placeholder=" " autocomplete="current-password">
+                        <label for="password">Password</label>
+                    </div>
+
+                    <button class="main-login" type="submit">Login <span>&rarr;</span></button>
+                </form>
+
+                <p class="signup-text">Don't have an account? <a href="#">Sign Up</a></p>
+            </div>
+
+            <div class="portal-art">
+                <div class="quote">
+                    <em>Better<br>Skills<br>Brighter<br>Future</em>
+                    <div class="quote-arrow">&#8599;</div>
+                </div>
+                <div class="portal-plant"><span></span><i></i><i></i><i></i></div>
+                <div class="pot"><div class="pot-top"></div><div class="pot-body"></div></div>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ======================= STATICS SECTION ======================= -->
+
+<section class="content-section statistics" id="courses">
+
+        <div class="section-title">
+            <span class="stats-icon">&#9637;</span>
+            <h2>Statistics</h2>
+            <span class="title-line"></span>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card green">
+                <div class="stat-icon">&#9823;</div>
+                <div class="stat-content">
+                    <strong data-count="1250" data-suffix="+">0</strong>
+                    <span>Trainees</span>
+                </div>
+                <span class="stat-arrow">&rarr;</span>
+            </div>
+
+            <div class="stat-card blue">
+                <div class="stat-icon">&#127891;</div>
+                <div class="stat-content">
+                    <strong data-count="100" data-suffix="+">0</strong>
+                    <span>Trainers</span>
+                </div>
+                <span class="stat-arrow">&rarr;</span>
+            </div>
+
+            <div class="stat-card cyan">
+                <div class="stat-icon">&#9636;</div>
+                <div class="stat-content">
+                    <strong data-count="200" data-suffix="+">0</strong>
+                    <span>Courses</span>
+                </div>
+                <span class="stat-arrow">&rarr;</span>
+            </div>
+
+            <div class="stat-card purple">
+                <div class="stat-icon">&#9817;</div>
+                <div class="stat-content">
+                    <strong data-count="500" data-suffix="+">0</strong>
+                    <span>Certifications</span>
+                </div>
+                <span class="stat-arrow">&rarr;</span>
+            </div>
+
+        </div>
+    </section>
+
+
+<!-- ======================= FAQ SECTION ======================= -->
+    <section class="content-section faq-section">
+
+        <div class="section-title">
+            <span class="faq-icon">?</span>
+            <h2>FAQs</h2>
+            <span class="title-line"></span>
+        </div>
+
+        <div class="faq">
+
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <b>1</b>
+                    <span>How do I enroll in a course?</span>
+                    <strong>&rsaquo;</strong>
+                </button>
+                <div class="faq-answer-wrap">
+                    <div class="faq-answer">
+                        <p>Select your preferred course and complete the enrollment process.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <b>2</b>
+                    <span>Is certification provided?</span>
+                    <strong>&rsaquo;</strong>
+                </button>
+                <div class="faq-answer-wrap">
+                    <div class="faq-answer">
+                        <p>Yes, certificates are provided after successful course completion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <b>3</b>
+                    <span>What are the payment options?</span>
+                    <strong>&rsaquo;</strong>
+                </button>
+                <div class="faq-answer-wrap">
+                    <div class="faq-answer">
+                        <p>We support multiple secure payment options.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <b>4</b>
+                    <span>Can I access courses on mobile?</span>
+                    <strong>&rsaquo;</strong>
+                </button>
+                <div class="faq-answer-wrap">
+                    <div class="faq-answer">
+                        <p>Yes, the platform is fully responsive and works on any device.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button">
+                    <b>5</b>
+                    <span>Is there a refund policy?</span>
+                    <strong>&rsaquo;</strong>
+                </button>
+                <div class="faq-answer-wrap">
+                    <div class="faq-answer">
+                        <p>Refunds are available within 7 days of enrollment, as per our policy.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+<!-- ======================= BOTTOM WAVE + FOOTER ======================= -->
+    <div class="wave">
+        <svg viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 120 C220 40 420 180 700 120 C960 66 1180 160 1440 96 V220 H0Z" fill="#cfe9f5"/>
+            <path d="M0 150 C240 80 440 200 720 146 C990 94 1200 180 1440 130 V220 H0Z" fill="#9fdcbe"/>
+            <path d="M0 182 C260 130 470 214 760 176 C1020 142 1230 200 1440 168 V220 H0Z" fill="#4fbf92"/>
+        </svg>
+    </div>
+
+    <footer class="footer-body">
+
+        <div class="footer-plant left"><span class="stem"></span><i></i><i></i><i></i></div>
+        <div class="footer-plant right"><span class="stem"></span><i></i><i></i><i></i></div>
+
+        <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+        <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+        <span class="bubble"></span>
+
+        <div class="footer-content">
+
+            <p class="footer-copyright">
+                &copy; <span id="year">2026</span> Capacity Connect. All rights reserved.
+                Made with <span class="heart">&hearts;</span> for lifelong learners.
+                <br>
+                <a href="#">Terms of Service</a> &middot; <a href="#">Privacy Policy</a>
+            </p>
+
+        </div>
+    </footer>
+
+    <script src="Scripts.js"></script>
+</body>
+</html>
