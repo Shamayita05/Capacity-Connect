@@ -1013,7 +1013,7 @@ SECTION TITLE
     display:flex;
     flex-direction:column;
     gap:12px;
-    padding-bottom:60px; 
+    padding-bottom:10px; 
 }
 
 .faq-item:nth-child(1){animation-delay:.05s}
@@ -1156,4 +1156,220 @@ SECTION TITLE
 .faq-item.open .faq-answer p{
     opacity:1;
     transform:translateY(0);
+}
+
+
+/* ==================== WAVE ==================== */
+
+/* =========================================================================
+   03. FOOTER WRAPPER
+   ========================================================================= */
+.wave{
+    line-height:0;
+    position:relative;
+}
+
+
+/* =========================================================================
+   04. WAVE 
+   ========================================================================= */
+.wave svg{
+    width:100%;
+    height:190px;
+    display:block;
+}
+
+.wave svg path{
+    transform-origin:center bottom;
+}
+.wave svg path:nth-of-type(1){animation:waveDrift 9s ease-in-out infinite}
+.wave svg path:nth-of-type(2){animation:waveDrift 7s ease-in-out infinite reverse}
+.wave svg path:nth-of-type(3){animation:waveDrift 11s ease-in-out infinite}
+
+.footer-body{
+    background:linear-gradient(180deg,#4fbf92,#2fa87d);
+    margin-top:-4px; 
+    position:relative;
+    overflow:hidden;
+    padding:34px 24px 26px;
+}
+
+
+/* =========================================================================
+   05. FLOATING PARTICLES
+   ========================================================================= */
+.bubble{
+    position:absolute;
+    bottom:-20px;
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    animation:bubbleRise linear infinite;
+    pointer-events:none;
+}
+.bubble:nth-child(1){left:8%; width:10px;height:10px;animation-duration:7s; animation-delay:0s}
+.bubble:nth-child(2){left:22%;width:6px; height:6px; animation-duration:5.5s;animation-delay:1.2s}
+.bubble:nth-child(3){left:38%;width:13px;height:13px;animation-duration:8.5s;animation-delay:.4s}
+.bubble:nth-child(4){left:55%;width:7px; height:7px; animation-duration:6s;  animation-delay:2s}
+.bubble:nth-child(5){left:70%;width:11px;height:11px;animation-duration:7.5s;animation-delay:.9s}
+.bubble:nth-child(6){left:86%;width:8px; height:8px; animation-duration:6.5s;animation-delay:1.6s}
+.bubble:nth-child(7){left:94%;width:5px; height:5px; animation-duration:5s;  animation-delay:2.4s}
+
+
+/* =========================================================================
+   06. FOOTER PLANTS — বাম ও ডানে, হাওয়ায় দোলে
+   ========================================================================= */
+.footer-plant{
+    position:absolute;
+    bottom:0;
+    width:64px;height:96px;
+    z-index:3;
+    transform-origin:bottom center;
+    animation:plantSway 4.2s ease-in-out infinite;
+}
+.footer-plant.left{left:22px}
+.footer-plant.right{right:22px;animation-delay:.6s}
+
+.footer-plant .stem{
+    position:absolute;
+    width:4px;height:64px;
+    background:linear-gradient(180deg,#e9fff3,#bdf1d6);
+    border-radius:3px;
+    bottom:0;left:28px;
+}
+.footer-plant i{
+    position:absolute;
+    width:32px;height:18px;
+    background:linear-gradient(135deg,#eafff2,#c5f3d9);
+    border-radius:100% 0 100% 0;
+    opacity:.9;
+}
+.footer-plant i:nth-child(2){left:-2px;top:42px; transform:rotate(-28deg);animation:leafFlicker 3s ease-in-out infinite}
+.footer-plant i:nth-child(3){left:28px;top:24px; transform:rotate(38deg); animation:leafFlicker 3s ease-in-out .4s infinite}
+.footer-plant i:nth-child(4){left:2px; top:60px; transform:rotate(-22deg);animation:leafFlicker 3s ease-in-out .8s infinite}
+
+
+/* =========================================================================
+   07. FOOTER CONTENT — লোগো, লিংক, কপিরাইট
+   ========================================================================= */
+.footer-content{
+    position:relative;
+    z-index:4;
+    max-width:760px;
+    margin:0 auto;
+    text-align:center;
+    color:#fff;
+}
+
+.footer-copyright{
+    font-size:11.5px;
+    color:rgba(255,255,255,.85);
+    letter-spacing:.3px;
+    line-height:1.6;
+    animation:fadeUp .7s var(--ease) .4s both;
+}
+.footer-copyright .heart{
+    display:inline-block;
+    color:#ffdce3;
+    animation:heartBeat 1.6s ease-in-out infinite;
+}
+.footer-copyright a{
+    color:#fff;
+    text-decoration:underline;
+    text-underline-offset:2px;
+} 
+
+
+/* =========================================================================
+   08. BACK-TO-TOP BUTTON — footer এর উপরে ভেসে থাকে
+   ========================================================================= */
+.back-to-top{
+    position:absolute;
+    right:26px;
+    top:-26px;
+    width:52px;height:52px;
+    border-radius:50%;
+    border:0;
+    cursor:pointer;
+    z-index:5;
+
+    background:linear-gradient(135deg,#1bc3ae,#068f96);
+    color:#fff;
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 24px rgba(4,120,115,.35);
+
+    animation:floatY 3s ease-in-out infinite;
+    transition:transform .4s var(--bounce),box-shadow .35s;
+}
+.back-to-top:hover{
+    transform:translateY(-6px) scale(1.06);
+    box-shadow:0 16px 30px rgba(4,120,115,.42);
+}
+.back-to-top:active{transform:translateY(-2px) scale(.96)}
+
+/* =========================================================================
+   09. KEYFRAMES
+   ========================================================================= */
+@keyframes waveDrift{
+    0%,100%{transform:translateX(0) scaleY(1)}
+    50%{transform:translateX(-2.5%) scaleY(1.04)}
+}
+@keyframes bubbleRise{
+    0%{transform:translateY(0) scale(.6);opacity:0}
+    12%{opacity:.9}
+    100%{transform:translateY(-230px) scale(1);opacity:0}
+}
+@keyframes plantSway{
+    0%,100%{transform:rotate(-3deg)}
+    50%{transform:rotate(3deg)}
+}
+@keyframes leafFlicker{
+    0%,100%{filter:brightness(1)}
+    50%{filter:brightness(1.15)}
+}
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(18px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes logoGlow{
+    0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)}
+    50%{box-shadow:0 0 16px rgba(255,255,255,.55)}
+}
+@keyframes heartBeat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.25)}
+}
+@keyframes floatY{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-7px)}
+}
+
+/* =========================================================================
+   10. RESPONSIVE
+   ========================================================================= */
+@media(max-width:700px){
+    .wave svg{height:130px}
+    .footer-body{padding:28px 18px 22px}
+    .footer-plant{width:48px;height:72px}
+    .footer-plant .stem{height:48px}
+    .footer-links{gap:14px}
+    .back-to-top{width:44px;height:44px;font-size:17px;right:16px;top:-22px}
+}
+
+@media(max-width:460px){
+    .footer-plant{display:none}  
+    .footer-links{gap:10px 16px}
+    .footer-copyright{font-size:10.5px;padding:0 10px}
+}
+
+
+/* =========================================================================
+   11. REDUCED MOTION
+   ========================================================================= */
+@media(prefers-reduced-motion:reduce){
+    .wave svg path,.bubble,.footer-plant,.footer-plant i,
+    .footer-logo span,.footer-copyright .heart,.back-to-top{animation:none}
+    *{transition-duration:.01ms !important}
 }
