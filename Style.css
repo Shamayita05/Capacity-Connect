@@ -743,13 +743,6 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ==================== STATICS SECTION  ==================== */
 
-.content-section{
-    width:min(1000px,100%);
-    margin:0 auto;
-    position:relative;
-    z-index:2;
-}
-
 .section-title{
     display:flex;
     align-items:center;
@@ -968,12 +961,6 @@ button{font-family:inherit;cursor:pointer;}
 /* =========================================================================
 SECTION TITLE
    ========================================================================= */
-.content-section{
-    width:min(760px,100%);
-    margin:0 auto;
-    position:relative;
-    z-index:2;
-}
 
 .section-title{
     display:flex;
