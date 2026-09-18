@@ -1,4 +1,148 @@
-*{
-    padding: 0;
-    margin: 0;
+/* ==================== BASE ==================== */
+:root{
+  --navy:#123a4d;
+  --teal:#1aa87c;
+  --teal-dark:#128a66;
+  --blue:#2f7fbf;
+  --muted:#5c7078;
+  --line:#e6efee;
+  --card-green:#eef9f1;
+  --card-blue:#eef4fc;
+  --radius:16px;
 }
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:"Poppins","Segoe UI",Arial,sans-serif;
+  color:var(--navy);
+  background:#fff;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;}
+
+:focus-visible{outline:2px solid var(--teal-dark);outline-offset:2px;}
+
+.page-wrap{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 24px 60px;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  padding:14px 44px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  z-index:30;
+}
+
+.brand{display:flex;align-items:center;gap:15px;}
+.brand-name{
+  display:flex;flex-direction:column;line-height:1.05;
+  font-weight:800;font-size:18px;letter-spacing:.4px;margin-top: 10px;
+}
+.brand-top{color:var(--navy);}
+.brand-bottom{color:var(--teal);}
+
+.nav-menu{
+  display:flex;align-items:center;gap:32px;margin-left:auto;
+}
+
+.nav-buttons{margin-left:auto;display:flex;gap:25px}
+
+/* shared button base */
+.login-nav,
+.signup-btn{
+  position:relative;
+  overflow:hidden;
+  border:none;
+  border-radius:24px;
+  padding:8px 26px;
+  font-size:14px;
+  font-weight:600;
+  isolation:isolate;
+}
+
+/* ==================== BUTTON 1: Explore Courses — border draw ==================== */
+.login-nav{
+  background:#fff;
+  color:var(--navy);
+  border:1.5px solid #dfe9e7;
+  border-radius:8px;
+  transition:color .3s ease;
+}
+.login-nav .line{
+  position:absolute;
+  background:var(--teal);
+}
+.login-nav .line-top{top:0;left:0;width:0;height:2px;transition:width .2s ease 0s;}
+.login-nav .line-right{top:0;right:0;width:2px;height:0;transition:height .2s ease .2s;}
+.login-nav .line-bottom{bottom:0;right:0;width:0;height:2px;transition:width .2s ease .4s;}
+.login-nav .line-left{bottom:0;left:0;width:2px;height:0;transition:height .2s ease .6s;}
+
+.login-nav:hover{color:var(--teal-dark);}
+.login-nav:hover .line-top,
+.login-nav:hover .line-bottom{width:100%;}
+.login-nav:hover .line-right,
+.login-nav:hover .line-left{height:100%;}
+
+/* ==================== BUTTON 2: Login — glow lift ==================== */
+.signup-btn{
+  background:linear-gradient(135deg,#2aa87a,#3fbf7f 55%,#2f7fbf);
+  background-size:180% 180%;
+  background-position:0% 50%;
+  color:#fff;
+  box-shadow:0 6px 16px rgba(26,168,124,.25);
+  transition:background-position .6s ease, transform .25s ease, box-shadow .25s ease;
+}
+.signup-btn:hover{
+  background-position:100% 50%;
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 16px 30px rgba(26,168,124,.35);
+}
+.signup-btn:active{transform:translateY(-1px) scale(1);}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width:768px){
+  .navbar{padding:10px 20px;}
+  .hamburger{display:flex;}
+
+  .nav-menu{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:flex-start;gap:16px;
+    padding:20px 24px 24px;background:#fff;
+    border-bottom:1px solid var(--line);
+    box-shadow:0 14px 26px rgba(18,58,77,.08);
+    display:none;
+  }
+  .nav-menu.is-open{display:flex;}
+
+  .nav-buttons{flex-direction:column;width:100%;gap:12px;}
+  .login-nav,.signup-btn{width:100%;text-align:center;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .login-nav,.signup-btn,.login-nav .line{transition-duration:.01ms !important;}
+  .signup-btn:hover{transform:none;}
+}
+
+/* ==================== HAMBURGER ==================== */
+
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:34px;height:34px;background:none;border:none;
+}
+.hamburger span{width:22px;height:2px;border-radius:2px;background:var(--navy);transition:transform .25s ease,opacity .2s ease;}
+.hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.is-open span:nth-child(2){opacity:0;}
+.hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
