@@ -422,7 +422,7 @@
             </div>
             <div class="field">
               <label for="t-desig">Current designation <span class="req" aria-hidden="true">*</span></label>
-              <input id="t-desig" required name="designation" type="text" placeholder="Ex - Scientific Assistant">
+              <input id="t-desig" required name="designation" type="text" placeholder="Ex - Scientific Assistant/Student">
             </div>
             <div class="field">
               <label for="t-office">Office / regional centre</label>
@@ -463,7 +463,7 @@
               </div>
             </div>
             <div class="field">
-              <label for="t-inst">Institution / university <span class="req" aria-hidden="true">*</span></label>
+              <label for="t-inst">Institution / university / School <span class="req" aria-hidden="true">*</span></label>
               <input id="t-inst" required name="institution" type="text" placeholder="Ex - University of Calcutta">
             </div>
             <div class="field">
@@ -475,8 +475,9 @@
           <h2 class="sec">Work experience</h2>
           <div class="grid">
             <div class="field">
-              <label for="t-totalexp">Total experience (years) <span class="req" aria-hidden="true">*</span></label>
-              <input id="t-totalexp" required name="totalExperience" type="number" inputmode="decimal" min="0" max="50" step="any" placeholder="Ex - 4" data-msg="Enter a number between 0 and 50.">
+              <!-- [CHANGED] Total experience ekhon OPTIONAL: label theke stray </span> ar input theke required tule deya holo -->
+              <label for="t-totalexp">Total experience (years)</label>
+              <input id="t-totalexp" name="totalExperience" type="number" inputmode="decimal" min="0" max="50" step="any" placeholder="Ex - 4" data-msg="Enter a number between 0 and 50.">
             </div>
           </div>
           <div id="expwrap"></div>
@@ -518,6 +519,217 @@
               </div>
             </div>
           </div>
+
+          <!-- ======== [NEW] COMPETENCY-MAPPING : Trainee competency mapping section (start) ======== -->
+          <h2 class="sec" id="h-competency">Competency mapping</h2>
+          <p class="comp-help">
+            Rate yourself honestly from 1 to 5 (1 Beginner, 2 Basic, 3 Intermediate, 4 Advanced, 5 Expert).
+            <b>Current level</b> is where you are today. <b>Target level</b> is the level you want to reach for your target role.
+            We use this to suggest courses that close your skill gaps.
+          </p>
+
+          <div class="grid">
+            <div class="field">
+              <label for="t-area">Functional area <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="t-area" name="functionalArea" required>
+                  <option value="">Select</option>
+                  <option>Operations / Technical</option>
+                  <option>Data and Analytics</option>
+                  <option>Research and Development</option>
+                  <option>IT / Software</option>
+                  <option>Management / Administration</option>
+                  <option>Training and Education</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="t-target">Target role <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-target" name="targetRole" type="text" maxlength="80" placeholder="Ex - Senior Data Analyst" required>
+            </div>
+            <div class="field">
+              <label for="t-timeframe">Time to reach target role</label>
+              <div class="select-wrap">
+                <select id="t-timeframe" name="targetTimeframe">
+                  <option value="">Select</option>
+                  <option>Within 6 months</option>
+                  <option>Within 1 year</option>
+                  <option>1 to 2 years</option>
+                  <option>2 to 3 years</option>
+                  <option>More than 3 years</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="comp-table" role="group" aria-labelledby="h-competency">
+            <div class="comp-row" data-comp="technical">
+              <p class="comp-name">Technical / domain knowledge</p>
+              <div class="field">
+                <label for="c-technical-cur">Current level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-technical-cur" class="comp-cur" name="compTechnicalCurrent" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-technical-tgt">Target level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-technical-tgt" class="comp-tgt" name="compTechnicalTarget" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <span class="comp-gap" aria-live="polite">Gap: -</span>
+            </div>
+            <div class="comp-row" data-comp="data">
+              <p class="comp-name">Data analysis and digital tools</p>
+              <div class="field">
+                <label for="c-data-cur">Current level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-data-cur" class="comp-cur" name="compDataCurrent" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-data-tgt">Target level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-data-tgt" class="comp-tgt" name="compDataTarget" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <span class="comp-gap" aria-live="polite">Gap: -</span>
+            </div>
+            <div class="comp-row" data-comp="communication">
+              <p class="comp-name">Communication and reporting</p>
+              <div class="field">
+                <label for="c-communication-cur">Current level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-communication-cur" class="comp-cur" name="compCommunicationCurrent" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-communication-tgt">Target level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-communication-tgt" class="comp-tgt" name="compCommunicationTarget" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <span class="comp-gap" aria-live="polite">Gap: -</span>
+            </div>
+            <div class="comp-row" data-comp="leadership">
+              <p class="comp-name">Leadership and teamwork</p>
+              <div class="field">
+                <label for="c-leadership-cur">Current level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-leadership-cur" class="comp-cur" name="compLeadershipCurrent" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-leadership-tgt">Target level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-leadership-tgt" class="comp-tgt" name="compLeadershipTarget" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <span class="comp-gap" aria-live="polite">Gap: -</span>
+            </div>
+            <div class="comp-row" data-comp="problem">
+              <p class="comp-name">Problem solving and decision making</p>
+              <div class="field">
+                <label for="c-problem-cur">Current level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-problem-cur" class="comp-cur" name="compProblemSolvingCurrent" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="c-problem-tgt">Target level <span class="req" aria-hidden="true">*</span></label>
+                <div class="select-wrap">
+                  <select id="c-problem-tgt" class="comp-tgt" name="compProblemSolvingTarget" required>
+                    <option value="">Select</option>
+                    <option value="1">1 - Beginner</option>
+                    <option value="2">2 - Basic</option>
+                    <option value="3">3 - Intermediate</option>
+                    <option value="4">4 - Advanced</option>
+                    <option value="5">5 - Expert</option>
+                  </select>
+                </div>
+              </div>
+              <span class="comp-gap" aria-live="polite">Gap: -</span>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="field span-all">
+              <label for="t-dev">Priority development areas <span class="req" aria-hidden="true">*</span></label>
+              <div class="tags" data-required data-required-msg="Add at least one area you want to develop.">
+                <input id="t-dev" class="tag-input" type="text" autocomplete="off" placeholder="Ex - Python, Report writing (press Enter after each)">
+                <input type="hidden" name="developmentAreas">
+              </div>
+            </div>
+            <div class="field span-all">
+              <label for="t-gapnote">Biggest challenge or skill gap in your current work</label>
+              <textarea id="t-gapnote" name="challengeNote" rows="3" maxlength="300" placeholder="Optional. Max 300 characters"></textarea>
+            </div>
+          </div>
+          <!-- ======== [END] COMPETENCY-MAPPING ======== -->
         </fieldset>
 
         <!-- ========== TRAINER ========== -->

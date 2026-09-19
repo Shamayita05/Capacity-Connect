@@ -578,6 +578,29 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
     }, 1000);
   });
 
+  /* ---------- [NEW] COMPETENCY-MAPPING: live gap = target level - current level ---------- */
+  function updateGap(row) {
+    const cur  = $('.comp-cur', row);
+    const tgt  = $('.comp-tgt', row);
+    const chip = $('.comp-gap', row);
+
+    chip.className = 'comp-gap';
+    if (!cur.value || !tgt.value) { chip.textContent = 'Gap: -'; return; }
+
+    const gap = Number(tgt.value) - Number(cur.value);
+    if (gap < 0)        { chip.textContent = 'Check levels'; return; }        // validate() eta error dekhabe
+    if (gap === 0)      { chip.textContent = 'At target'; chip.classList.add('is-met'); return; }
+    chip.textContent = 'Gap: ' + gap;
+    chip.classList.add(gap >= 3 ? 'is-big' : 'is-gap');                        // 3 ba tar beshi = boro gap
+  }
+
+  $$('.comp-row').forEach((row) => {
+    const cur = $('.comp-cur', row);
+    const tgt = $('.comp-tgt', row);
+    cur.addEventListener('change', () => { clearError(tgt); updateGap(row); });
+    tgt.addEventListener('change', () => updateGap(row));
+  });
+
   /* ---------- Validation ---------- */
   function validate() {
     const v = roleSel.value;
@@ -607,6 +630,16 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
       const bad = el.validity.typeMismatch || el.validity.patternMismatch ||
                   el.validity.rangeUnderflow || el.validity.rangeOverflow || el.validity.badInput;
       if (bad) fail(el, el.dataset.msg || 'Check this value.');
+    });
+
+    // [NEW] COMPETENCY-MAPPING: target level current level er cheye kom hote parbe na
+    $$('.comp-row', form).forEach((row) => {
+      const cur = $('.comp-cur', row), tgt = $('.comp-tgt', row);
+      if (cur.matches(':disabled') || tgt.matches(':disabled')) return;   // hidden role (disabled fieldset) skip
+      if (cur.value && tgt.value && Number(tgt.value) < Number(cur.value) &&
+          !tgt.closest('.field').classList.contains('invalid')) {
+        fail(tgt, "Target level can't be lower than your current level.");
+      }
     });
 
     // Passwords
@@ -687,6 +720,7 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
     const keep = roleSel.value;
     form.reset();
     roleSel.value = keep;
+    $$('.comp-row').forEach(updateGap);   // [NEW] COMPETENCY-MAPPING: reset er por gap chip abar "Gap: -" kora
 
     $$('.tags').forEach((b) => b._tags.clear());
     $$('.upload').forEach(resetUpload);
