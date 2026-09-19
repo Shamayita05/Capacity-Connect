@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- [NEW] SIGNUP-MODAL: signup form er font (Bricolage Grotesque + Figtree) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="Landing_Page.css">
 </head>
 <body>
@@ -112,7 +115,8 @@
                     <button class="main-login" type="submit">Login <span>&rarr;</span></button>
                 </form>
 
-                <p class="signup-text">Don't have an account? <a href="#">Sign Up</a></p>
+                <!-- [CHANGED] SIGNUP-MODAL: Sign Up link e id="openSignup" add kora holo (click korle form popup khulbe) -->
+                <p class="signup-text">Don't have an account? <a href="#" id="openSignup">Sign Up</a></p>
             </div>
 
             <div class="portal-art">
@@ -288,6 +292,493 @@
 
         </div>
     </footer>
+
+    <!-- ======================= [NEW] SIGNUP-MODAL : Sign Up popup ======================= -->
+    <!-- Icon sprite (form er icon gulo) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-user-plus" viewBox="0 0 24 24"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M16 19h6"/><path d="M19 16v6"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 9l5 -5l5 5"/><path d="M12 4v12"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.585 10.587a2 2 0 0 0 2.829 2.828"/><path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87"/><path d="M3 3l18 18"/></symbol>
+  </svg>
+
+    <!-- Overlay: background transparent, sudhu form card ta dekha jay. Backdrop color dite CSS e --signup-backdrop change korun -->
+    <div class="signup-overlay" id="signupOverlay" role="dialog" aria-modal="true" aria-labelledby="signup-title">
+    <form class="card" id="signup" data-theme="dark" novalidate>
+
+      <header class="card-head">
+
+        <svg class="iso" viewBox="0 0 400 140" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+          <defs>
+            <path id="iso-loop" vector-effect="non-scaling-stroke"
+                  d="M-60 0C-60-38-20-52 22-44C62-36 78-8 62 22C46 52 0 58-30 42C-52 30-60 14-60 0Z"/>
+          </defs>
+          <g fill="none" stroke="currentColor" stroke-width="1.2">
+            <use href="#iso-loop" transform="translate(300 70) scale(.45)"/>
+            <use href="#iso-loop" transform="translate(300 70) scale(.85)"/>
+            <use href="#iso-loop" transform="translate(300 70) scale(1.3)"/>
+            <use href="#iso-loop" transform="translate(300 70) scale(1.85)"/>
+            <use href="#iso-loop" transform="translate(300 70) scale(2.5)"/>
+          </g>
+        </svg>
+
+        <!-- [CHANGED] SIGNUP-MODAL: href="landing.html" silaye href="#" kora holo. Click korle popup bondho hoy (JS handle kore) -->
+        <a href="#" class="back-btn" id="backBtn" aria-label="Back to home page">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M5 12l6 6"/><path d="M5 12l6 -6"/></svg>
+          <!-- <span>Back to home</span> -->
+        </a>
+
+        <span class="mark"><svg class="i" aria-hidden="true"><use href="#i-user-plus"/></svg></span>
+        <div class="head-text">
+          <!-- [CHANGED] SIGNUP-MODAL: aria-labelledby er jonno id="signup-title" add -->
+          <h1 id="signup-title">Create your account</h1>
+          <p>Join Capacity Connect. Pick the role that fits you and we'll show the right form.</p>
+        </div>
+      </header>
+
+      <div class="card-body">
+
+        <!-- Role -->
+        <div class="field">
+          <label for="role">Register as <span class="req" aria-hidden="true">*</span></label>
+          <div class="select-wrap">
+            <select id="role" name="role" required>
+              <option value="">Select your role</option>
+              <option value="trainee" selected>Trainee</option>
+              <option value="trainer">Trainer</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+        <p class="notice" id="rnote" role="status"></p>
+
+        <!-- Account details (common for all roles) -->
+        <fieldset id="common" hidden disabled aria-labelledby="h-account">
+          <h2 class="sec" id="h-account">Account details</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="fullName">Full name <span class="req" aria-hidden="true">*</span></label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Ex - Ananya Sen" required>
+            </div>
+            <div class="field">
+              <label for="email"><span id="email-label">Email</span> <span class="req" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="Ex - name@imd.gov.in" data-msg="Enter a valid email address." required>
+            </div>
+            <div class="field">
+              <label for="mobile">Mobile number <span class="req" aria-hidden="true">*</span></label>
+              <input id="mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" pattern="[6-9][0-9]{9}" data-msg="Enter a valid 10-digit mobile number." placeholder="Ex - 9876543210" required>
+            </div>
+            <div class="field">
+              <label for="pw">Password <span class="req" aria-hidden="true">*</span></label>
+              <div class="pw">
+                <input id="pw" name="password" type="password" autocomplete="new-password" placeholder="Min 8 characters" required>
+                <button type="button" class="pw-toggle" data-target="pw" aria-label="Show password" aria-pressed="false">
+                  <svg class="i eye" aria-hidden="true"><use href="#i-eye"/></svg>
+                  <svg class="i eye-off" aria-hidden="true"><use href="#i-eye-off"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="pw2">Confirm password <span class="req" aria-hidden="true">*</span></label>
+              <div class="pw">
+                <input id="pw2" name="confirmPassword" type="password" autocomplete="new-password" required>
+                <button type="button" class="pw-toggle" data-target="pw2" aria-label="Show password" aria-pressed="false">
+                  <svg class="i eye" aria-hidden="true"><use href="#i-eye"/></svg>
+                  <svg class="i eye-off" aria-hidden="true"><use href="#i-eye-off"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ========== TRAINEE ========== -->
+        <fieldset class="role-section" data-role="trainee" hidden disabled>
+          <h2 class="sec">Personal and organization</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="t-dob">Date of birth <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-dob" required name="dob" type="date">
+            </div>
+            <div class="field">
+              <label for="t-gender">Gender <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="t-gender" required name="gender">
+                  <option value="">Select</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="t-org">Organization / department <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-org" name="organization" type="text" placeholder="Ex - India Meteorological Department" required>
+            </div>
+            <div class="field">
+              <label for="t-empid">Employee ID </label>
+              <input id="t-empid" name="employeeId" type="text" placeholder="Ex - IMD-20458">
+            </div>
+            <div class="field">
+              <label for="t-desig">Current designation <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-desig" required name="designation" type="text" placeholder="Ex - Scientific Assistant">
+            </div>
+            <div class="field">
+              <label for="t-office">Office / regional centre</label>
+              <div class="select-wrap">
+                <select id="t-office" name="office">
+                  <option value="">Select</option>
+                  <option>New Delhi (HQ)</option>
+                  <option>Kolkata</option>
+                  <option>Mumbai</option>
+                  <option>Chennai</option>
+                  <option>Pune</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="t-photo">Profile photo</label>
+              <div class="upload">
+                <input id="t-photo" name="photo" type="file" accept="image/png,image/jpeg"
+                       data-max-mb="2" data-types="image/png,image/jpeg" data-type-msg="Upload a JPG or PNG image.">
+                <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
+                <span class="upload-text" data-default="JPG or PNG">JPG or PNG</span>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="sec">Qualifications</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="t-qual">Highest qualification <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="t-qual" name="qualification" required>
+                  <option value="">Select</option>
+                  <option>10+2</option>
+                  <option>Graduate</option>
+                  <option>Post graduate</option>
+                  <option>PhD</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="t-inst">Institution / university <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-inst" required name="institution" type="text" placeholder="Ex - University of Calcutta">
+            </div>
+            <div class="field">
+              <label for="t-year">Year of passing <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-year" required class="js-year" name="yearOfPassing" type="number" inputmode="numeric" min="1950" placeholder="Ex - 2019" data-msg="Enter a valid year.">
+            </div>
+          </div>
+
+          <h2 class="sec">Work experience</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="t-totalexp">Total experience (years) <span class="req" aria-hidden="true">*</span></label>
+              <input id="t-totalexp" required name="totalExperience" type="number" inputmode="decimal" min="0" max="50" step="any" placeholder="Ex - 4" data-msg="Enter a number between 0 and 50.">
+            </div>
+          </div>
+          <div id="expwrap"></div>
+          <button type="button" class="btn btn-add" id="addexp">
+            <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg>Add another experience
+          </button>
+
+          <h2 class="sec">Skills, interests and certificates</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="t-skills">Skills</label>
+              <div class="tags">
+                <input id="t-skills" class="tag-input" type="text" autocomplete="off" placeholder="Type a skill and press Enter">
+                <input type="hidden" name="skills">
+              </div>
+            </div>
+            <div class="field">
+              <label for="t-interests">Areas of interest</label>
+              <div class="tags">
+                <input id="t-interests" class="tag-input" type="text" autocomplete="off" placeholder="Type a topic and press Enter">
+                <input type="hidden" name="interests">
+              </div>
+            </div>
+            <div class="field">
+              <label for="t-certname">Certificate name</label>
+              <input id="t-certname" name="certificateName" type="text" placeholder="Numerical Weather Prediction">
+            </div>
+            <div class="field">
+              <label for="t-certorg">Issuing organization</label>
+              <input id="t-certorg" name="certificateOrg" type="text" placeholder="Ex - IITM Pune">
+            </div>
+            <div class="field">
+              <label for="t-certfile">Certificate file</label>
+              <div class="upload">
+                <input id="t-certfile" name="certificateFiles" type="file" accept="application/pdf" multiple
+                       data-max-mb="5" data-types="application/pdf" data-type-msg="Certificates must be PDF files.">
+                <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
+                <span class="upload-text" data-default="PDF, max 5 MB (multiple)">PDF, max 5 MB (multiple)</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ========== TRAINER ========== -->
+        <fieldset class="role-section" data-role="trainer" hidden disabled>
+          <h2 class="sec">Professional details</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="tr-desig">Designation <span class="req" aria-hidden="true">*</span></label>
+              <input id="tr-desig" name="designation" type="text" placeholder="Ex - Scientist E" required>
+            </div>
+            <div class="field">
+              <label for="tr-org">Organization / department <span class="req" aria-hidden="true">*</span></label>
+              <input id="tr-org" name="organization" type="text" placeholder="Ex - India Meteorological Department" required>
+            </div>
+            <div class="field">
+              <label for="tr-empid">Employee ID</label>
+              <input id="tr-empid" name="employeeId" type="text" placeholder="Ex - IMD-10231">
+            </div>
+            <div class="field">
+              <label for="tr-office">Office / regional centre</label>
+              <div class="select-wrap">
+                <select id="tr-office" name="office">
+                  <option value="">Select</option>
+                  <option>New Delhi (HQ)</option>
+                  <option>Kolkata</option>
+                  <option>Mumbai</option>
+                  <option>Chennai</option>
+                  <option>Pune</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-exp">Training experience (years) <span class="req" aria-hidden="true">*</span></label>
+              <input id="tr-exp" name="trainingExperience" type="number" inputmode="decimal" min="0" max="60" step="any" placeholder="Ex - 12" data-msg="Enter a number between 0 and 60." required>
+            </div>
+            <div class="field">
+              <label for="tr-lang">Languages known</label>
+              <input id="tr-lang" name="languages" type="text" placeholder="Ex - English, Hindi, Bengali">
+            </div>
+          </div>
+
+          <h2 class="sec">Qualifications</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="tr-qual">Highest qualification <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="tr-qual" name="qualification" required>
+                  <option value="">Select</option>
+                  <option>Graduate</option>
+                  <option>Post graduate</option>
+                  <option>PhD</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-inst">Institution / university <span class="req" aria-hidden="true">*</span></label>
+              <input id="tr-inst" required name="institution" type="text" placeholder="Ex - IIT Delhi">
+            </div>
+            <div class="field">
+              <label for="tr-year">Year of passing <span class="req" aria-hidden="true">*</span></label>
+              <input id="tr-year" required class="js-year" name="yearOfPassing" type="number" inputmode="numeric" min="1950" placeholder="Ex - 2008" data-msg="Enter a valid year.">
+            </div>
+          </div>
+
+          <h2 class="sec">Competency mapping</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="tr-subjects">Subject expertise <span class="req" aria-hidden="true">*</span></label>
+              <div class="tags" data-required data-required-msg="Add at least one subject of expertise.">
+                <input id="tr-subjects" class="tag-input" type="text" autocomplete="off" placeholder="Type a subject and press Enter">
+                <input type="hidden" name="subjects">
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-skills">Key skills</label>
+              <div class="tags">
+                <input id="tr-skills" class="tag-input" type="text" autocomplete="off" placeholder="Type a skill and press Enter">
+                <input type="hidden" name="skills">
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-level">Proficiency level <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="tr-level" name="proficiency" required>
+                  <option value="">Select</option>
+                  <option>Intermediate</option>
+                  <option>Advanced</option>
+                  <option>Expert</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-mode">Preferred training mode <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="tr-mode" name="trainingMode" required>
+                  <option value="">Select</option>
+                  <option>Online</option>
+                  <option>Offline</option>
+                  <option>Both</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="sec">Bio and documents</h2>
+          <div class="grid">
+            <div class="field span-all">
+              <label for="tr-bio">Short bio <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="tr-bio" required name="bio" rows="3" placeholder="Two or three lines about your work and teaching areas"></textarea>
+            </div>
+            <div class="field">
+              <label for="tr-photo">Profile photo</label>
+              <div class="upload">
+                <input id="tr-photo" name="photo" type="file" accept="image/png,image/jpeg"
+                       data-max-mb="2" data-types="image/png,image/jpeg" data-type-msg="Upload a JPG or PNG image.">
+                <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
+                <span class="upload-text" data-default="JPG or PNG">JPG or PNG</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-cv">Resume / CV <span class="req" aria-hidden="true">*</span></label>
+              <div class="upload">
+                <input id="tr-cv" name="resume" type="file" accept="application/pdf" required
+                       data-max-mb="5" data-types="application/pdf" data-type-msg="Your resume must be a PDF."
+                       data-required-msg="Upload your resume as a PDF.">
+                <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
+                <span class="upload-text" data-default="PDF, max 5 MB">PDF, max 5 MB</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tr-certs">Certificates</label>
+              <div class="upload">
+                <input id="tr-certs" name="certificateFiles" type="file" accept="application/pdf" multiple
+                       data-max-mb="5" data-types="application/pdf" data-type-msg="Certificates must be PDF files.">
+                <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
+                <span class="upload-text" data-default="PDF, max 5 MB (multiple)">PDF, max 5 MB (multiple)</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ========== ADMIN ========== -->
+        <fieldset class="role-section" data-role="admin" hidden disabled>
+          <h2 class="sec">Official details</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="a-empid">Employee ID <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-empid" name="employeeId" type="text" placeholder="Ex - IMD-00512" required>
+            </div>
+            <div class="field">
+              <label for="a-desig">Designation <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-desig" name="designation" type="text" placeholder="Ex - Training Coordinator" required>
+            </div>
+            <div class="field">
+              <label for="a-div">Division / department <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-div" name="division" type="text" placeholder="Ex - Training Division" required>
+            </div>
+            <div class="field">
+              <label for="a-office">Office / regional centre <span class="req" aria-hidden="true">*</span></label>
+              <div class="select-wrap">
+                <select id="a-office" name="office" required>
+                  <option value="">Select</option>
+                  <option>New Delhi (HQ)</option>
+                  <option>Kolkata</option>
+                  <option>Mumbai</option>
+                  <option>Chennai</option>
+                  <option>Pune</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="sec">Verification</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="a-code">Authorization code <span class="req" aria-hidden="true">*</span></label>
+              <input id="a-code" name="authCode" type="text" autocomplete="off" placeholder="Code issued by Super Admin" required>
+            </div>
+            <div class="field">
+              <label for="a-otp">Email OTP <span class="req" aria-hidden="true">*</span></label>
+              <div class="otp-row">
+                <input id="a-otp" name="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" data-msg="Enter the 6-digit OTP." placeholder="6-digit OTP" required>
+                <button type="button" class="btn" id="send-otp">Send OTP</button>
+              </div>
+              <p class="hint" id="otp-hint" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="a-proof">Official ID proof <span class="req" aria-hidden="true">*</span></label>
+              <div class="upload">
+                <input id="a-proof" required name="idProof" type="file" accept="application/pdf,image/png,image/jpeg"
+                       data-max-mb="2" data-types="application/pdf,image/png,image/jpeg" data-type-msg="Upload a PDF, JPG or PNG file."
+                       data-required-msg="Upload your official ID proof.">
+                <svg class="i" aria-hidden="true"><use href="#i-upload"/></svg>
+                <span class="upload-text" data-default="PDF or image, max 2 MB">PDF or image, max 2 MB</span>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Terms + submit -->
+        <fieldset id="tail" hidden disabled>
+          <div class="field check-field">
+            <label class="check">
+              <input type="checkbox" id="agree" name="agree">
+              <span>I agree to the <a href="#" target="_blank" rel="noopener">terms</a> and <a href="#" target="_blank" rel="noopener">privacy policy</a></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <p class="form-msg" id="msg" role="status" aria-live="polite"></p>
+        <button type="submit" class="btn btn-primary" id="go" hidden><span id="go-text">Create trainee account</span></button>
+
+        <!-- [CHANGED] SIGNUP-MODAL: href="login.html" silaye href="#". Click korle popup bondho hoye Portal Section e scroll korbe (JS handle kore) -->
+        <p class="alt">Already have an account? <a href="#" id="login">Login</a></p>
+      </div>
+    </form>
+    </div>
+
+    <!-- [NEW] SIGNUP-MODAL: Submit confirm message (screen er upore ashe). Yes = submit hoy, No = bondho hoy -->
+    <div class="confirm-bar" id="confirmBar" role="alertdialog" aria-live="assertive" aria-labelledby="confirmText">
+      <span class="confirm-text" id="confirmText">Are you sure you want to submit the form?</span>
+      <div class="confirm-actions">
+        <button type="button" class="confirm-btn confirm-yes" id="confirmYes">Yes</button>
+        <button type="button" class="confirm-btn confirm-no" id="confirmNo">No</button>
+      </div>
+    </div>
+
+    <!-- [NEW] SIGNUP-MODAL: Submit successful hole screen er upore ei success message ashe (6 sec por nijei jay) -->
+    <div class="success-bar" id="successBar" role="status" aria-live="polite">
+      <span class="success-icon" aria-hidden="true">&#10003;</span>
+      <div class="success-body">
+        <strong>Form submitted successfully!</strong>
+        <span id="successText"></span>
+      </div>
+      <button type="button" class="success-close" id="successClose" aria-label="Close message">&times;</button>
+    </div>
+
+    <!-- Work-experience entry er template (form JS use kore) -->
+    <template id="exp-tpl">
+    <div class="exp">
+      <div class="grid">
+        <div class="field">
+          <label data-for="org">Organization</label>
+          <input data-f="org" name="expOrg" type="text" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label data-for="role">Role / designation</label>
+          <input data-f="role" name="expRole" type="text" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label data-for="from">From</label>
+          <input data-f="from" class="exp-from" name="expFrom" type="date">
+        </div>
+        <div class="field">
+          <label data-for="to">To</label>
+          <input data-f="to" class="exp-to" name="expTo" type="date">
+        </div>
+      </div>
+    </div>
+  </template>
+    <!-- ======================= [END] SIGNUP-MODAL ======================= -->
 
     <script src="Landing_Page.js"></script>
 </body>
