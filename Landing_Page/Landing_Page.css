@@ -527,7 +527,7 @@ button{font-family:inherit;cursor:pointer;}
 .signup-text a:hover::after{width:100%}
 
 
-.portal-art{
+/* .portal-art{
     width:47%;
     height:100%;
     position:absolute;
@@ -553,7 +553,7 @@ button{font-family:inherit;cursor:pointer;}
     opacity:.8;
 }
 
-.quote{
+ .quote{
     position:absolute;
     top:80px;left:95px;
     font-family:"Brush Script MT",cursive;
@@ -738,7 +738,7 @@ button{font-family:inherit;cursor:pointer;}
         animation-iteration-count:1 !important;
         transition-duration:.01ms !important;
     }
-}
+} */
 
 
 /* ==================== STATICS SECTION  ==================== */
