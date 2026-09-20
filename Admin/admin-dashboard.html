@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – Capacity Connect</title>
+  <meta name="description" content="Capacity Connect admin control panel: manage users, courses, assessments and platform activity." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="dashboard">
+  <!-- Sticky top navigation (rendered by admin.js) -->
+  <header data-navbar></header>
+
+  <main class="page container">
+    <!-- ================= ADMIN PROFILE ================= -->
+    <section class="card profile-card reveal">
+      <div class="profile-main">
+    <video
+        class="avatar"
+        autoplay
+        loop
+        muted
+        playsinline
+        aria-label="Admin"
+    >
+        <source src="assets/admin-icon.mp4" type="video/mp4">
+    </video>
+    <div>
+          <h2>Admin</h2>
+          <div class="role">System Administrator</div>
+          
+          <span class="badge badge-active">Admin Status: Active</span>
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div class="stat-mini"><div class="val" id="statLogin" style="font-size:.95rem">—</div><div class="lbl">Last Login</div></div>
+        <div class="stat-mini"><div class="val" id="statUsers">—</div><div class="lbl">Total Users</div></div>
+        <div class="stat-mini"><div class="val" id="statPending">—</div><div class="lbl">Pending Approvals</div></div>
+      </div>
+    </section>
+
+    <!-- ================= CATEGORY 1 & 2 ================= -->
+    <div class="grid grid-2">
+      <section class="category">
+       
+        <article class="card task-card large reveal" data-href="user-monitoring.html" style="--accent:var(--aqua)">
+          <div class="task-icon acronym">UM</div>
+          <div>
+            <h3 class="card-title">User Monitoring</h3>
+            <p class="card-sub">Manage trainer approvals, trainee approvals, user roles and certifications from one place.</p>
+            <span class="card-cta" style="margin-top:.75rem">View user monitoring <span data-icon="arrow"></span></span>
+          </div>
+        </article>
+      </section>
+
+      <section class="category">
+       
+        <article class="card task-card large reveal" data-href="course-monitoring.html" style="--accent:var(--sage)">
+          <div class="task-icon acronym">CM</div>
+          <div>
+            <h3 class="card-title">Course Monitoring</h3>
+            <p class="card-sub">Manage course approvals, learning content, assessments and course progress from one place.</p>
+            <span class="card-cta" style="margin-top:.75rem">View course monitoring <span data-icon="arrow"></span></span>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <!-- ================= CATEGORY 3 & 4 ================= -->
+    <div class="grid grid-2">
+      <section class="category">
+        
+        <article class="card task-card large reveal" data-href="statistics.html" style="--accent:var(--mint)">
+          <div class="task-icon acronym">AD</div>
+          <div>
+            <h3 class="card-title">Analytics Dashboard</h3>
+            <p class="card-sub">Totals, charts, progress trackers and recent activity across the platform.</p>
+            <span class="card-cta" style="margin-top:.75rem">View statistics <span data-icon="arrow"></span></span>
+          </div>
+        </article>
+      </section>
+      <section class="category">
+       
+        <article class="card task-card large reveal" data-href="admin-management.html" style="--accent:var(--sage-dark)">
+          <div class="task-icon acronym">NA</div>
+          <div>
+            <h3 class="card-title">Notifications &amp; Announcements</h3>
+            <p class="card-sub">Publish a new update and manage previously published updates.</p>
+            <span class="card-cta" style="margin-top:.75rem">Manage updates <span data-icon="arrow"></span></span>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container">© 2026 Capacity Connect </div></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

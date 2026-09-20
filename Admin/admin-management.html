@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Management – Capacity Connect</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="admin-management">
+  <header data-navbar></header>
+
+  <main class="page container">
+    <a class="back-link" href="admin-dashboard.html"><span data-icon="back"></span> Back to dashboard</a>
+    <div class="page-header">
+      <div><h1>Admin Management</h1><p>Publish notifications, announcements, achievements and new learning content.</p></div>
+    </div>
+
+    <!-- SECTION 1: Publish new update -->
+    <section class="card reveal">
+      <h2 class="card-title" style="font-size:1.25rem">Publish New Update</h2>
+      <p class="card-sub" style="margin-bottom:1.25rem">Fields marked * are required.</p>
+      <form id="updateForm" class="form-grid" novalidate>
+        <div class="field" data-required><label for="updType">Update Type *</label>
+          <select id="updType"><option>Notification</option><option>Announcement</option><option>Achievement</option><option>New Learning Content</option></select></div>
+        <div class="field" data-required><label for="updTitle">Title *</label><input id="updTitle" type="text" placeholder="e.g. New course now open" /><span class="error">Title is required.</span></div>
+        <div class="field full" data-required><label for="updDesc">Description *</label><textarea id="updDesc" placeholder="Write the details of this update..."></textarea><span class="error">Description is required.</span></div>
+        <div class="field"><label for="updImage">Optional Image</label><input id="updImage" type="file" accept="image/*" /></div>
+        <div class="field" data-required><label for="updDate">Date *</label><input id="updDate" type="date" /><span class="error">Date is required.</span></div>
+        <div class="field" data-required><label for="updAudience">Audience *</label>
+          <select id="updAudience"><option>Everyone</option><option>Trainees</option><option>Trainers</option></select></div>
+        <div class="full" style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem">
+          <button class="btn btn-primary btn-lg" type="submit" id="publishBtn"><span data-icon="bell"></span> Publish Update</button>
+          <button class="btn btn-ghost btn-lg" type="button" id="cancelEdit" style="display:none">Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- SECTION 2: Previous updates -->
+    <section style="margin-top:2.5rem">
+      <div class="page-header" style="margin-bottom:1rem">
+        <div><h2 style="font-size:1.35rem">Previous Updates</h2><p>All published updates, newest first.</p></div>
+        <span class="badge badge-published" id="updatesCount">0 published</span>
+      </div>
+      <div id="updatesList" class="stack"></div>
+    </section>
+  </main>
+
+  <footer><div class="container">© 2026 Capacity Connect • Learn • Develop • Grow</div></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

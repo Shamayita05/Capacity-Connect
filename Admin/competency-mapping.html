@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Capacity Connect admin competency mapping for finding and assigning suitable trainers." />
+  <title>Competency Mapping – Capacity Connect</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    :root {
+      --sage: #a1cca5;
+      --sage-dark: #8fb996;
+      --navy: #023047;
+      --mint: #80ed99;
+      --aqua: #a8dadc;
+      --background: #f4f8f5;
+      --surface: #ffffff;
+      --muted: #526f7d;
+      --line: rgba(2, 48, 71, 0.12);
+      --shadow: 0 8px 24px rgba(2, 48, 71, 0.08);
+      --shadow-hover: 0 14px 32px rgba(2, 48, 71, 0.14);
+      --radius: 16px;
+      --ease: 200ms ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--navy);
+      background: var(--background);
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header .container {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--mint);
+      background: var(--navy);
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .brand-name { display: block; font-weight: 750; line-height: 1.15; }
+    .brand-tag { display: block; color: var(--muted); font-size: 12px; }
+    .admin-label { color: var(--muted); font-size: 14px; font-weight: 650; }
+
+    main { padding: 30px 0 64px; }
+    .back-link {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 650;
+    }
+    .back-link:hover { color: var(--navy); }
+    .page-heading { margin-bottom: 28px; }
+    .page-heading h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; }
+    .page-heading p { max-width: 700px; margin: 8px 0 0; color: var(--muted); font-size: 17px; }
+
+    .panel, .trainer-card, .assigned-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .search-panel { padding: 24px; }
+    .search-panel h2, .section-heading h2 { margin: 0; font-size: 21px; }
+    .search-panel > p, .section-heading p { margin: 5px 0 0; color: var(--muted); }
+    .search-controls {
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) auto;
+      align-items: end;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    label { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 700; }
+    select {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 42px 0 14px;
+      color: var(--navy);
+      background: var(--surface);
+      border: 1.5px solid var(--sage);
+      border-radius: 10px;
+    }
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      color: var(--navy);
+      background: var(--surface);
+      border: 1.5px solid var(--sage-dark);
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform var(--ease), box-shadow var(--ease), background var(--ease);
+    }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 7px 16px rgba(2, 48, 71, 0.13); }
+    .button-primary { color: var(--surface); background: var(--navy); border-color: var(--navy); }
+    .button-success { background: var(--mint); border-color: var(--mint); }
+    .button-quiet { border-color: transparent; }
+    .button-small { min-height: 38px; padding: 7px 14px; font-size: 14px; }
+
+    .content-section { margin-top: 36px; }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .result-count { color: var(--muted); font-size: 14px; font-weight: 650; }
+    .trainer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .trainer-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: transform var(--ease), box-shadow var(--ease);
+    }
+    .trainer-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .trainer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+    .trainer-top h3 { margin: 0; font-size: 21px; }
+    .trainer-role { margin: 3px 0 0; color: var(--muted); font-size: 14px; }
+    .match-badge {
+      flex: 0 0 auto;
+      padding: 6px 10px;
+      color: var(--navy);
+      background: rgba(128, 237, 153, 0.45);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fact-label { display: block; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .fact-value { display: block; margin-top: 2px; font-size: 14px; font-weight: 650; }
+    .skills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill {
+      padding: 5px 9px;
+      background: rgba(168, 218, 220, 0.3);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .progress-meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; font-size: 14px; font-weight: 700; }
+    .progress-track { height: 10px; overflow: hidden; background: rgba(2, 48, 71, 0.09); border-radius: 999px; }
+    .progress-fill { height: 100%; width: var(--score); background: var(--mint); border-radius: inherit; transition: width 500ms ease; }
+    details { border-top: 1px solid var(--line); padding-top: 13px; }
+    summary { cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .breakdown { display: grid; gap: 7px; margin-top: 10px; }
+    .breakdown-row { display: flex; justify-content: space-between; gap: 20px; font-size: 13px; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: auto; }
+    .empty-state { padding: 30px; color: var(--muted); text-align: center; }
+
+    .assigned-list { display: grid; gap: 12px; }
+    .assigned-card {
+      padding: 16px 18px;
+      display: grid;
+      grid-template-columns: minmax(160px, 1fr) minmax(160px, 1fr) auto auto;
+      align-items: center;
+      gap: 14px;
+    }
+    .assigned-subject { font-weight: 800; }
+    .assigned-name { color: var(--muted); font-weight: 650; }
+    .status { color: #0b5a2b; font-size: 13px; font-weight: 800; }
+
+    dialog {
+      width: min(600px, calc(100% - 30px));
+      max-height: calc(100vh - 30px);
+      padding: 0;
+      color: var(--navy);
+      background: var(--surface);
+      border: 0;
+      border-radius: var(--radius);
+      box-shadow: 0 24px 60px rgba(2, 48, 71, 0.28);
+    }
+    dialog::backdrop { background: rgba(2, 48, 71, 0.55); backdrop-filter: blur(3px); }
+    .dialog-inner { padding: 24px; }
+    .dialog-head { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .dialog-head h2 { margin: 0; font-size: 21px; }
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      background: var(--background);
+      border: 0;
+      border-radius: 50%;
+      font-size: 22px;
+    }
+    .profile-intro { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .avatar {
+      width: 62px;
+      height: 62px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      background: var(--aqua);
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .profile-intro h3 { margin: 0; font-size: 22px; }
+    .profile-intro p { margin: 2px 0 0; color: var(--muted); }
+    .profile-details { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .profile-block { padding: 14px; background: var(--background); border-radius: 10px; }
+    .profile-block.full { grid-column: 1 / -1; }
+    .profile-block h4 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; }
+    .profile-block p { margin: 0; color: var(--muted); font-size: 14px; }
+    .dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+    .confirm-copy { color: var(--muted); }
+    .confirm-copy strong { color: var(--navy); }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 10;
+      max-width: calc(100% - 40px);
+      padding: 13px 17px;
+      color: var(--surface);
+      background: var(--navy);
+      border-left: 5px solid var(--mint);
+      border-radius: 10px;
+      box-shadow: var(--shadow-hover);
+      font-weight: 700;
+      animation: toast-in 220ms ease;
+    }
+    footer { padding: 24px 0; color: var(--muted); border-top: 1px solid var(--line); text-align: center; font-size: 14px; }
+    @keyframes toast-in { from { opacity: 0; transform: translateY(10px); } }
+
+    @media (max-width: 760px) {
+      .trainer-grid { grid-template-columns: 1fr; }
+      .assigned-card { grid-template-columns: 1fr auto; }
+      .assigned-name { grid-column: 1; }
+      .status { grid-column: 2; grid-row: 1 / span 2; }
+      .assigned-card .button { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, 1160px); }
+      main { padding-top: 22px; }
+      .search-controls { grid-template-columns: 1fr; }
+      .search-controls .button { width: 100%; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+      .facts, .profile-details { grid-template-columns: 1fr; }
+      .profile-block.full { grid-column: auto; }
+      .card-actions, .dialog-actions { display: grid; grid-template-columns: 1fr; }
+      .card-actions .button, .dialog-actions .button { width: 100%; }
+      .assigned-card { grid-template-columns: 1fr; }
+      .assigned-name, .status, .assigned-card .button { grid-column: auto; grid-row: auto; }
+      .dialog-inner { padding: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body data-page="competency-assessment">
+  <header data-navbar></header>
+
+  <main class="container">
+    <a class="back-link" href="user-monitoring.html">← Back to User Monitoring</a>
+    <header class="page-heading">
+      <h1>Competency Mapping</h1>
+      <p>Identify suitable trainers based on their skills, qualifications, experience, and certifications.</p>
+    </header>
+
+    <section class="panel search-panel" aria-labelledby="finder-title">
+      <h2 id="finder-title">Find a Suitable Trainer</h2>
+      <p>Select a subject to compare trainer competencies and professional experience.</p>
+      <div class="search-controls">
+        <div>
+          <label for="subjectSelect">Select Subject</label>
+          <select id="subjectSelect">
+            <option value="">Select a subject</option>
+            <option>Cybersecurity</option>
+            <option>Python</option>
+            <option>Data Science</option>
+            <option>Machine Learning</option>
+            <option>Database Management</option>
+            <option>Computer Networks</option>
+            <option>Artificial Intelligence</option>
+            <option>Cloud Computing</option>
+            <option>Web Development</option>
+          </select>
+        </div>
+        <button class="button button-primary" id="findButton" type="button">Find Suitable Trainers</button>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="results-title">
+      <div class="section-heading">
+        <div><h2 id="results-title">Suitable Trainers</h2><p id="resultsSubtitle">Select a subject to see ranked trainer matches.</p></div>
+        <span class="result-count" id="resultCount" aria-live="polite"></span>
+      </div>
+      <div class="trainer-grid" id="trainerResults">
+        <div class="panel empty-state">Choose a subject above to begin competency matching.</div>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="assigned-title">
+      <div class="section-heading">
+        <div><h2 id="assigned-title">Assigned Trainers</h2><p>Confirmed subject and trainer assignments are saved in this browser.</p></div>
+      </div>
+      <div class="assigned-list" id="assignedList"></div>
+    </section>
+  </main>
+
+  <footer><div class="container">© 2026 Capacity Connect • Learn • Develop • Grow</div></footer>
+
+  <dialog id="profileDialog" aria-labelledby="profileDialogTitle">
+    <div class="dialog-inner">
+      <div class="dialog-head"><h2 id="profileDialogTitle">Trainer Profile</h2><button class="icon-button" type="button" data-close="profileDialog" aria-label="Close profile">×</button></div>
+      <div id="profileContent"></div>
+      <div class="dialog-actions"><button class="button button-primary" type="button" data-close="profileDialog">Close</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="assignDialog" aria-labelledby="assignDialogTitle">
+    <div class="dialog-inner">
+      <div class="dialog-head"><h2 id="assignDialogTitle">Assign Trainer?</h2><button class="icon-button" type="button" data-close="assignDialog" aria-label="Close assignment confirmation">×</button></div>
+      <p class="confirm-copy" id="assignCopy"></p>
+      <div class="dialog-actions">
+        <button class="button button-quiet" type="button" data-close="assignDialog">Cancel</button>
+        <button class="button button-success" id="confirmAssignment" type="button">Confirm Assignment</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const STORAGE_KEY = "capacityConnectCompetencyAssignments";
+      const subjects = {
+        "Cybersecurity": ["cybersecurity", "network security", "ethical hacking", "computer networks"],
+        "Python": ["python", "data science", "machine learning", "web development"],
+        "Data Science": ["data science", "python", "machine learning", "statistics", "data analytics"],
+        "Machine Learning": ["machine learning", "artificial intelligence", "python", "data science"],
+        "Database Management": ["database management", "dbms", "sql", "database design", "database administration"],
+        "Computer Networks": ["computer networks", "network security", "networking", "cybersecurity"],
+        "Artificial Intelligence": ["artificial intelligence", "machine learning", "python", "data science"],
+        "Cloud Computing": ["cloud computing", "devops", "aws", "computer networks"],
+        "Web Development": ["web development", "javascript", "html", "css", "python"]
+      };
+
+      const trainers = [
+        {
+          id: 1,
+          name: "Ananya Sen",
+          specialization: "Cybersecurity",
+          qualification: "M.Tech in Computer Science",
+          experience: 5,
+          skills: ["Cybersecurity", "Network Security", "Ethical Hacking", "Python"],
+          certifications: ["Cybersecurity Fundamentals", "Ethical Hacking", "Network Security", "Python"],
+          bio: "Security educator focused on practical threat analysis, secure networks, and hands-on cyber awareness training."
+        },
+        {
+          id: 2,
+          name: "Rahul Das",
+          specialization: "Data Science",
+          qualification: "M.Tech in Data Science",
+          experience: 4,
+          skills: ["Python", "Data Science", "Machine Learning", "Statistics"],
+          certifications: ["Data Science", "Python", "Machine Learning"],
+          bio: "Data science trainer who turns statistical concepts and machine learning workflows into approachable lessons."
+        },
+        {
+          id: 3,
+          name: "Priya Sharma",
+          specialization: "Database Management",
+          qualification: "M.Tech in Computer Science",
+          experience: 6,
+          skills: ["DBMS", "SQL", "Database Design", "Data Analytics"],
+          certifications: ["SQL", "Database Administration"],
+          bio: "Database specialist with experience teaching relational design, query optimization, and administration fundamentals."
+        },
+        {
+          id: 4,
+          name: "Arjun Mehta",
+          specialization: "Cloud Computing",
+          qualification: "M.Tech in Information Technology",
+          experience: 7,
+          skills: ["Cloud Computing", "AWS", "DevOps", "Computer Networks"],
+          certifications: ["AWS Solutions Architect", "Cloud Practitioner", "DevOps Foundation"],
+          bio: "Cloud practitioner and mentor experienced in infrastructure, deployment pipelines, and scalable systems."
+        },
+        {
+          id: 5,
+          name: "Meera Iyer",
+          specialization: "Artificial Intelligence",
+          qualification: "PhD in Computer Science and Engineering",
+          experience: 8,
+          skills: ["Artificial Intelligence", "Machine Learning", "Python", "Deep Learning"],
+          certifications: ["Applied AI", "Machine Learning", "Deep Learning", "Python"],
+          bio: "AI researcher and trainer who emphasizes responsible, practical applications of intelligent systems."
+        },
+        {
+          id: 6,
+          name: "Kabir Khan",
+          specialization: "Web Development",
+          qualification: "MCA in Software Engineering",
+          experience: 5,
+          skills: ["Web Development", "JavaScript", "HTML", "CSS", "Python"],
+          certifications: ["JavaScript Development", "Responsive Web Design", "Python"],
+          bio: "Web development instructor specializing in accessible interfaces, browser fundamentals, and project-based learning."
+        }
+      ];
+
+      const subjectSelect = document.getElementById("subjectSelect");
+      const findButton = document.getElementById("findButton");
+      const results = document.getElementById("trainerResults");
+      const resultsSubtitle = document.getElementById("resultsSubtitle");
+      const resultCount = document.getElementById("resultCount");
+      const assignedList = document.getElementById("assignedList");
+      const profileDialog = document.getElementById("profileDialog");
+      const assignDialog = document.getElementById("assignDialog");
+      let selectedSubject = "";
+      let pendingTrainerId = null;
+      let currentMatches = [];
+
+      const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[char]);
+      const normalize = (value) => String(value).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+      function scoreTrainer(trainer, subject) {
+        const related = subjects[subject].map(normalize);
+        const specialization = normalize(trainer.specialization);
+        const skills = trainer.skills.map(normalize);
+        const qualification = normalize(trainer.qualification);
+        const certifications = trainer.certifications.map(normalize);
+
+        const exactSpecialization = specialization === normalize(subject);
+        const relatedSkillCount = related.filter((term) => skills.some((skill) => skill.includes(term) || term.includes(skill))).length;
+        const skillRatio = relatedSkillCount / related.length;
+        const skillScore = Math.round(Math.min(50, (exactSpecialization ? 30 : 0) + skillRatio * 25));
+
+        const technicalQualification = ["computer science", "information technology", "software engineering", "data science", "information security"];
+        const qualificationDirect = related.some((term) => qualification.includes(term));
+        const qualificationScore = qualificationDirect ? 20 : technicalQualification.some((term) => qualification.includes(term)) ? 14 : 6;
+
+        const experienceScore = Math.min(15, Math.round((trainer.experience / 8) * 15));
+        const relevantCertificates = certifications.filter((certification) => related.some((term) => certification.includes(term) || term.includes(certification))).length;
+        const certificationScore = Math.min(15, relevantCertificates * 5);
+        const total = Math.min(100, skillScore + qualificationScore + experienceScore + certificationScore);
+
+        return { total, skill: skillScore, qualification: qualificationScore, experience: experienceScore, certifications: certificationScore };
+      }
+
+      function cardMarkup(entry) {
+        const trainer = entry.trainer;
+        const score = entry.score;
+        return `
+          <article class="trainer-card">
+            <div class="trainer-top">
+              <div><h3>${escapeHtml(trainer.name)}</h3><p class="trainer-role">${escapeHtml(trainer.specialization)} Trainer</p></div>
+              <span class="match-badge">${score.total}% Match</span>
+            </div>
+            <div class="facts">
+              <div><span class="fact-label">Qualification</span><span class="fact-value">${escapeHtml(trainer.qualification)}</span></div>
+              <div><span class="fact-label">Experience</span><span class="fact-value">${trainer.experience} Years</span></div>
+            </div>
+            <div><span class="fact-label">Skills</span><div class="skills">${trainer.skills.map((skill) => `<span class="skill">${escapeHtml(skill)}</span>`).join("")}</div></div>
+            <div><span class="fact-label">Certifications</span><span class="fact-value">${trainer.certifications.length} professional certifications</span></div>
+            <div>
+              <div class="progress-meta"><span>Competency Match</span><span>${score.total}%</span></div>
+              <div class="progress-track" role="progressbar" aria-label="${escapeHtml(trainer.name)} competency match" aria-valuenow="${score.total}" aria-valuemin="0" aria-valuemax="100"><div class="progress-fill" style="--score:${score.total}%"></div></div>
+            </div>
+            <details><summary>View competency breakdown</summary>${breakdownMarkup(score)}</details>
+            <div class="card-actions">
+              <button class="button button-small" type="button" data-profile="${trainer.id}">View Profile</button>
+              <button class="button button-small button-primary" type="button" data-assign="${trainer.id}">Assign Trainer</button>
+            </div>
+          </article>`;
+      }
+
+      function breakdownMarkup(score) {
+        return `<div class="breakdown">
+          <div class="breakdown-row"><span>Subject / Related Skill</span><strong>${score.skill} / 50</strong></div>
+          <div class="breakdown-row"><span>Qualification Relevance</span><strong>${score.qualification} / 20</strong></div>
+          <div class="breakdown-row"><span>Experience</span><strong>${score.experience} / 15</strong></div>
+          <div class="breakdown-row"><span>Certifications</span><strong>${score.certifications} / 15</strong></div>
+        </div>`;
+      }
+
+      function renderMatches() {
+        selectedSubject = subjectSelect.value;
+        if (!selectedSubject) {
+          results.innerHTML = '<div class="panel empty-state">Please select a subject to view suitable trainers.</div>';
+          resultsSubtitle.textContent = "Select a subject to see ranked trainer matches.";
+          resultCount.textContent = "";
+          return;
+        }
+
+        currentMatches = trainers
+          .map((trainer) => ({ trainer, score: scoreTrainer(trainer, selectedSubject) }))
+          .sort((a, b) => b.score.total - a.score.total || b.trainer.experience - a.trainer.experience);
+
+        resultsSubtitle.textContent = `Trainer competencies ranked for ${selectedSubject}.`;
+        resultCount.textContent = `${currentMatches.length} trainers compared`;
+        results.innerHTML = currentMatches.map(cardMarkup).join("");
+        results.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function getAssignments() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function renderAssignments() {
+        const assignments = getAssignments();
+        assignedList.innerHTML = assignments.length ? assignments.map((assignment) => `
+          <article class="assigned-card">
+            <span class="assigned-subject">${escapeHtml(assignment.subject)}</span>
+            <span class="assigned-name">${escapeHtml(assignment.trainer)}</span>
+            <span class="status">✓ Assigned</span>
+            <button class="button button-small" type="button" data-profile="${assignment.trainerId}">View Profile</button>
+          </article>`).join("") : '<div class="panel empty-state">No trainers assigned yet.</div>';
+      }
+
+      function openProfile(trainerId) {
+        const trainer = trainers.find((item) => item.id === Number(trainerId));
+        if (!trainer) return;
+        const subject = selectedSubject || trainer.specialization;
+        const score = scoreTrainer(trainer, subject);
+        document.getElementById("profileContent").innerHTML = `
+          <div class="profile-intro"><div class="avatar" aria-hidden="true">${trainer.name.split(" ").map((part) => part[0]).join("")}</div><div><h3>${escapeHtml(trainer.name)}</h3><p>${escapeHtml(trainer.specialization)} Trainer</p></div></div>
+          <div class="profile-details">
+            <div class="profile-block"><h4>Qualification</h4><p>${escapeHtml(trainer.qualification)}</p></div>
+            <div class="profile-block"><h4>Experience</h4><p>${trainer.experience} Years</p></div>
+            <div class="profile-block full"><h4>Skills</h4><p>${trainer.skills.map(escapeHtml).join(" • ")}</p></div>
+            <div class="profile-block full"><h4>Certifications</h4><p>${trainer.certifications.map(escapeHtml).join(" • ")}</p></div>
+            <div class="profile-block full"><h4>About</h4><p>${escapeHtml(trainer.bio)}</p></div>
+            <div class="profile-block full"><h4>Competency Match for ${escapeHtml(subject)} — ${score.total}%</h4>${breakdownMarkup(score)}</div>
+          </div>`;
+        profileDialog.showModal();
+      }
+
+      function openAssignment(trainerId) {
+        if (!selectedSubject) {
+          subjectSelect.focus();
+          showToast("Select a subject before assigning a trainer.");
+          return;
+        }
+        const trainer = trainers.find((item) => item.id === Number(trainerId));
+        if (!trainer) return;
+        pendingTrainerId = trainer.id;
+        document.getElementById("assignCopy").innerHTML = `Are you sure you want to assign <strong>${escapeHtml(trainer.name)}</strong> to <strong>${escapeHtml(selectedSubject)}</strong>?`;
+        assignDialog.showModal();
+      }
+
+      function confirmAssignment() {
+        const trainer = trainers.find((item) => item.id === pendingTrainerId);
+        if (!trainer || !selectedSubject) return;
+        const assignments = getAssignments().filter((assignment) => assignment.subject !== selectedSubject);
+        assignments.unshift({ subject: selectedSubject, trainer: trainer.name, trainerId: trainer.id });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(assignments));
+        assignDialog.close();
+        pendingTrainerId = null;
+        renderAssignments();
+        showToast(`✓ ${trainer.name} assigned successfully to ${selectedSubject}.`);
+      }
+
+      function showToast(message) {
+        document.querySelector(".toast")?.remove();
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.setAttribute("role", "status");
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        window.setTimeout(() => toast.remove(), 3500);
+      }
+
+      findButton.addEventListener("click", renderMatches);
+      subjectSelect.addEventListener("change", renderMatches);
+      document.addEventListener("click", (event) => {
+        const profileButton = event.target.closest("[data-profile]");
+        const assignButton = event.target.closest("[data-assign]");
+        const closeButton = event.target.closest("[data-close]");
+        if (profileButton) openProfile(profileButton.dataset.profile);
+        if (assignButton) openAssignment(assignButton.dataset.assign);
+        if (closeButton) document.getElementById(closeButton.dataset.close).close();
+      });
+      document.getElementById("confirmAssignment").addEventListener("click", confirmAssignment);
+      [profileDialog, assignDialog].forEach((dialog) => dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      }));
+
+      renderAssignments();
+    })();
+  </script>
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
