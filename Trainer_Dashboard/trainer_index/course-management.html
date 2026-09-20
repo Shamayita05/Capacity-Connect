@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management | Capacity Connect</title>
+    <link rel="stylesheet" href="../trainer_style/course-management.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a href="../../Landing_Page/Landing_Page.html" class="brand">CAPACITY<br><span>CONNECT</span></a>
+
+    <nav>
+        <a href="../trainer_index/trainer-dashboard.html">Dashboard</a>
+        <a href="../../Landing_Page/Landing_Page.html">Log out</a>
+    </nav>
+</header>
+
+<main class="page-container">
+
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">TRAINER PORTAL</p>
+            <h1>Course <span>Management</span></h1>
+            <p>Create and manage training courses, learning materials, assessments and examinations.</p>
+        </div>
+
+        <button class="btn primary" id="createCourseBtn">+ Create Course</button>
+    </section>
+
+    <!-- SUMMARY CARDS -->
+    <section class="summary-grid">
+        <div class="summary-card">
+            <span class="card-label">Total Courses</span>
+            <strong id="totalCourses">0</strong>
+            <small>Across all subjects</small>
+        </div>
+
+        <div class="summary-card">
+            <span class="card-label">Active Courses</span>
+            <strong id="activeCourses">0</strong>
+            <small>Currently ongoing</small>
+        </div>
+
+        <div class="summary-card">
+            <span class="card-label">Enrolled Trainees</span>
+            <strong id="totalTrainees">0</strong>
+            <small>Total registrations</small>
+        </div>
+
+        <div class="summary-card">
+            <span class="card-label">Upcoming Exams</span>
+            <strong id="upcomingExams">0</strong>
+            <small>Scheduled tests</small>
+        </div>
+    </section>
+
+    <!-- COURSE LIST -->
+    <section class="content-card">
+        <div class="section-header">
+            <div>
+                <h2>All Courses</h2>
+                <p>Manage your training courses and course-related activities.</p>
+            </div>
+
+            <div class="filters">
+                <input id="searchCourse" type="search" placeholder="Search course...">
+
+                <select id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="Draft">Draft</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="courseList" class="course-list"></div>
+
+        <div id="courseEmpty" class="empty-state">
+            <h3>No courses found</h3>
+            <p>Create a course or change your search/filter.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>Capacity Connect · Digital Capacity Building & Learning Management Portal</p>
+</footer>
+
+
+<!-- =====================================================
+     COURSE CREATE / EDIT MODAL
+===================================================== -->
+<div class="modal-overlay" id="courseModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <p class="eyebrow">COURSE DETAILS</p>
+                <h2 id="courseModalTitle">Create Course</h2>
+            </div>
+            <button class="close-btn" data-close="courseModal">&times;</button>
+        </div>
+
+        <form id="courseForm" class="form">
+            <div class="form-grid">
+
+                <label>
+                    Course Title *
+                    <input id="courseTitle" required>
+                </label>
+
+                <label>
+                    Course Code
+                    <input id="courseCode" placeholder="e.g. CC-WD-101">
+                </label>
+
+                <label>
+                    Course Category
+                    <input id="courseCategory" placeholder="e.g. Web Development">
+                </label>
+
+                <label>
+                    Course Duration
+                    <input id="courseDuration" placeholder="e.g. 6 Weeks">
+                </label>
+
+                <label class="full">
+                    Course Description *
+                    <textarea id="courseDescription" rows="3" required></textarea>
+                </label>
+
+                <label class="full">
+                    Learning Objectives
+                    <textarea id="learningObjectives" rows="3"
+                        placeholder="Enter the skills or outcomes trainees should achieve."></textarea>
+                </label>
+
+                <label class="full">
+                    Prerequisites
+                    <textarea id="prerequisites" rows="2"></textarea>
+                </label>
+
+                <label>
+                    Start Date
+                    <input id="courseStart" type="date">
+                </label>
+
+                <label>
+                    End Date
+                    <input id="courseEnd" type="date">
+                </label>
+
+                <label>
+                    Maximum Trainees
+                    <input id="maxTrainees" type="number" min="1">
+                </label>
+
+                <label>
+                    Course Status
+                    <select id="courseStatus">
+                        <option>Draft</option>
+                        <option>Active</option>
+                        <option>Completed</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn secondary" data-close="courseModal">Cancel</button>
+                <button class="btn primary" id="courseSubmit">Create Course</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- =====================================================
+     COURSE MANAGE MODAL
+===================================================== -->
+<div class="modal-overlay" id="manageModal">
+    <div class="modal large-modal">
+
+        <div class="modal-header">
+            <div>
+                <p class="eyebrow">COURSE MANAGEMENT</p>
+                <h2 id="manageTitle">Course</h2>
+                <p id="manageSubtitle"></p>
+            </div>
+            <button class="close-btn" data-close="manageModal">&times;</button>
+        </div>
+
+        <div class="course-summary">
+            <div><span>Duration</span><strong id="manageDuration">-</strong></div>
+            <div><span>Start Date</span><strong id="manageStart">-</strong></div>
+            <div><span>End Date</span><strong id="manageEnd">-</strong></div>
+            <div><span>Enrolled</span><strong id="manageEnrolled">0</strong></div>
+            <div><span>Status</span><strong id="manageStatus">-</strong></div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="overview">Overview</button>
+            <button class="tab" data-tab="materials">Materials</button>
+            <button class="tab" data-tab="assessments">Assessments</button>
+            <button class="tab" data-tab="examinations">Examinations</button>
+        </div>
+
+        <div class="tab-content">
+
+            <!-- OVERVIEW -->
+            <section class="tab-panel active" id="overviewPanel">
+                <div class="overview-grid">
+                    <div>
+                        <h3>Description</h3>
+                        <p id="overviewDescription"></p>
+                    </div>
+
+                    <div>
+                        <h3>Learning Objectives</h3>
+                        <p id="overviewObjectives"></p>
+                    </div>
+
+                    <div>
+                        <h3>Prerequisites</h3>
+                        <p id="overviewPrerequisites"></p>
+                    </div>
+                </div>
+
+                <div class="performance-grid">
+                    <div>
+                        <span>Average Assessment Score</span>
+                        <strong>--</strong>
+                    </div>
+                    <div>
+                        <span>Average Attendance</span>
+                        <strong>--</strong>
+                    </div>
+                    <div>
+                        <span>Completed Assessments</span>
+                        <strong>--</strong>
+                    </div>
+                    <div>
+                        <span>Upcoming Exams</span>
+                        <strong id="courseUpcomingExams">0</strong>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- MATERIALS -->
+            <section class="tab-panel" id="materialsPanel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Course Materials</h3>
+                        <p>Resources belonging to this course.</p>
+                    </div>
+                    <button class="btn primary small" id="addMaterialBtn">+ Add Material</button>
+                </div>
+
+                <div id="materialList"></div>
+
+                <div class="empty-state small-empty" id="materialEmpty">
+                    <p>No course materials added yet.</p>
+                </div>
+            </section>
+
+
+            <!-- ASSESSMENTS -->
+            <section class="tab-panel" id="assessmentsPanel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Assessments</h3>
+                        <p>Assignments, quizzes and practice tasks.</p>
+                    </div>
+                    <button class="btn primary small" id="addAssessmentBtn">+ Create Assessment</button>
+                </div>
+
+                <div id="assessmentList"></div>
+
+                <div class="empty-state small-empty" id="assessmentEmpty">
+                    <p>No assessments created yet.</p>
+                </div>
+            </section>
+
+
+            <!-- EXAMINATIONS -->
+            <section class="tab-panel" id="examinationsPanel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Examinations</h3>
+                        <p>Create, schedule and manage MCQ examinations.</p>
+                    </div>
+                    <button class="btn primary small" id="addExamBtn">+ Create Examination</button>
+                </div>
+
+                <div id="examList"></div>
+
+                <div class="empty-state small-empty" id="examEmpty">
+                    <p>No examinations created yet.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- =====================================================
+     MATERIAL MODAL
+===================================================== -->
+<div class="modal-overlay" id="materialModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="materialModalTitle">Add Material</h2>
+            <button class="close-btn" data-close="materialModal">&times;</button>
+        </div>
+
+        <form id="materialForm" class="form">
+            <div class="form-grid">
+
+                <label>
+                    Material Title *
+                    <input id="materialTitle" required>
+                </label>
+
+                <label>
+                    Module / Topic
+                    <input id="materialModule">
+                </label>
+
+                <label class="full">
+                    Description
+                    <textarea id="materialDescription" rows="3"></textarea>
+                </label>
+
+                <label>
+                    Resource Type
+                    <select id="materialType">
+                        <option>PDF</option>
+                        <option>PPT</option>
+                        <option>DOC</option>
+                        <option>Video</option>
+                        <option>Image</option>
+                        <option>External Link</option>
+                    </select>
+                </label>
+
+                <label>
+                    File
+                    <input id="materialFile" type="file">
+                </label>
+
+                <label class="full">
+                    External URL
+                    <input id="materialUrl" type="url" placeholder="https://example.com">
+                </label>
+
+                <label class="full">
+                    Additional Notes
+                    <textarea id="materialNotes" rows="2"></textarea>
+                </label>
+
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn secondary" data-close="materialModal">Cancel</button>
+                <button class="btn primary">Save Material</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- =====================================================
+     ASSESSMENT MODAL
+===================================================== -->
+<div class="modal-overlay" id="assessmentModal">
+    <div class="modal large-modal">
+        <div class="modal-header">
+            <h2 id="assessmentModalTitle">Create Assessment</h2>
+            <button class="close-btn" data-close="assessmentModal">&times;</button>
+        </div>
+
+        <form id="assessmentForm" class="form">
+
+            <div class="form-grid">
+                <label>
+                    Assessment Title *
+                    <input id="assessmentTitle" required>
+                </label>
+
+                <label>
+                    Assessment Type
+                    <select id="assessmentType">
+                        <option>Assignment</option>
+                        <option>Quiz</option>
+                        <option>Practice Task</option>
+                    </select>
+                </label>
+
+                <label>
+                    Module / Topic
+                    <input id="assessmentModule">
+                </label>
+
+                <label>
+                    Total Marks
+                    <input id="assessmentMarks" type="number" min="1">
+                </label>
+
+                <label>
+                    Release Date
+                    <input id="assessmentRelease" type="date">
+                </label>
+
+                <label>
+                    Submission Deadline
+                    <input id="assessmentDeadline" type="date">
+                </label>
+
+                <label class="full">
+                    Description
+                    <textarea id="assessmentDescription" rows="3"></textarea>
+                </label>
+
+                <label class="full">
+                    Instructions
+                    <textarea id="assessmentInstructions" rows="2"></textarea>
+                </label>
+            </div>
+
+            <div id="quizBuilder" class="question-builder hidden">
+                <div class="panel-heading">
+                    <div>
+                        <h3>MCQ Questions</h3>
+                        <p>Add questions for this quiz.</p>
+                    </div>
+                    <button type="button" class="btn secondary small" id="addAssessmentQuestion">
+                        + Add Question
+                    </button>
+                </div>
+
+                <div id="assessmentQuestions"></div>
+
+                <div class="marks-summary">
+                    Quiz Question Marks: <strong id="assessmentQuestionMarks">0</strong>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn secondary" data-close="assessmentModal">Cancel</button>
+                <button class="btn primary">Save Assessment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- =====================================================
+     EXAM MODAL
+===================================================== -->
+<div class="modal-overlay" id="examModal">
+    <div class="modal large-modal">
+
+        <div class="modal-header">
+            <div>
+                <p class="eyebrow">EXAMINATION</p>
+                <h2 id="examModalTitle">Create Examination</h2>
+            </div>
+            <button class="close-btn" data-close="examModal">&times;</button>
+        </div>
+
+        <form id="examForm" class="form">
+
+            <div class="form-grid">
+                <label>
+                    Exam Title *
+                    <input id="examTitle" required>
+                </label>
+
+                <label>
+                    Exam Date
+                    <input id="examDate" type="date">
+                </label>
+
+                <label class="full">
+                    Exam Description
+                    <textarea id="examDescription" rows="2"></textarea>
+                </label>
+
+                <label>
+                    Start Time
+                    <input id="examTime" type="time">
+                </label>
+
+                <label>
+                    Duration (minutes)
+                    <input id="examDuration" type="number" min="1" value="30">
+                </label>
+
+                <label>
+                    Total Marks
+                    <input id="examMarks" type="number" min="1">
+                </label>
+
+                <label>
+                    Passing Marks
+                    <input id="passingMarks" type="number" min="0">
+                </label>
+
+                <label>
+                    Maximum Attempts
+                    <input id="maxAttempts" type="number" min="1" value="1">
+                </label>
+
+                <label class="full">
+                    Instructions
+                    <textarea id="examInstructions" rows="2"></textarea>
+                </label>
+            </div>
+
+            <div class="question-builder">
+                <div class="panel-heading">
+                    <div>
+                        <h3>MCQ Question Builder</h3>
+                        <p>Create the questions that trainees will answer.</p>
+                    </div>
+                    <button type="button" class="btn secondary small" id="addExamQuestion">
+                        + Add Question
+                    </button>
+                </div>
+
+                <div id="examQuestions"></div>
+
+                <div class="marks-summary">
+                    <span>Total Questions: <strong id="examQuestionCount">0</strong></span>
+                    <span>Total Marks: <strong id="examTotalMarks">0</strong></span>
+                </div>
+            </div>
+
+            <div class="schedule-summary">
+                <h3>Examination Summary</h3>
+                <p><strong>Exam:</strong> <span id="summaryExam">-</span></p>
+                <p><strong>Date:</strong> <span id="summaryDate">-</span></p>
+                <p><strong>Time:</strong> <span id="summaryTime">-</span></p>
+                <p><strong>Duration:</strong> <span id="summaryDuration">-</span></p>
+                <p><strong>Questions:</strong> <span id="summaryQuestions">0</span></p>
+                <p><strong>Total Marks:</strong> <span id="summaryMarks">0</span></p>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn secondary" id="saveExamDraft">Save Draft</button>
+                <button type="button" class="btn primary" id="scheduleExam">Schedule Examination</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- =====================================================
+     CONFIRMATION MODAL
+===================================================== -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 id="confirmTitle">Confirm Action</h2>
+            <button class="close-btn" data-close="confirmModal">&times;</button>
+        </div>
+        <p id="confirmMessage" style="color: var(--muted); margin-bottom: 20px;"></p>
+        <div class="modal-actions">
+            <button class="btn secondary" data-close="confirmModal">Cancel</button>
+            <button class="btn danger" id="confirmAction">Delete</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="../trainer_script/course-management.js"></script>
+</body>
+</html>

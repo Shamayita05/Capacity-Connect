@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Dashboard | Capacity Connect</title>
+    <link rel="stylesheet" href="../trainer_style/trainer-dashboard.css">
+</head>
+<body>
+
+    <div class="dashboard-shell">
+
+        <!-- Top Navigation -->
+        <header class="topbar">
+            <a href="../../Landing_Page/Landing_Page.html" class="brand" aria-label="Capacity Connect home">
+                <span class="brand-title">CAPACITY<br><span class="brand-highlight">CONNECT</span></span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="trainer-profile.html">Profile</a>
+                <a href="../../Landing_Page/Landing_Page.html">Log out</a>
+            </nav>
+        </header>
+
+        <main class="dashboard-content">
+
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+
+                <div class="logo-placeholder">
+                        <video
+                            class="trainer-animation"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            aria-label="Capacity Connect training animation">
+                            <source src="../animated_icon/Trainer_icon.mp4" type="video/mp4">
+                            Your browser does not support the video element.
+                        </video> 
+                </div>
+
+                <div class="welcome-text">
+                    <p class="eyebrow">TRAINER PORTAL</p>
+                    <h1>Welcome, <span id="trainerName">Trainer</span></h1>
+                    <p>
+                        Manage your courses, share learning resources, create assessments,
+                        and track trainee participation from one place.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Dashboard Actions -->
+            <section class="dashboard-actions" aria-label="Trainer dashboard options">
+
+                <a class="dashboard-card" href="course-management.html">
+                    <div class="card-icon">CM</div>
+                    <div>
+                        <h2>Course Management</h2>
+                        <p>Create, update and manage your<br> training courses.</p>
+                    </div>
+                    <span class="arrow">➜</span>
+                </a>
+
+                <a class="dashboard-card" href="trainer-library.html">
+                    <div class="card-icon">LB</div>
+                    <div>
+                        <h2>Library</h2>
+                        <p>Upload and organize lectures, presentations and study materials.</p>
+                    </div>
+                    <span class="arrow">➜</span>
+                </a>
+
+                <a class="dashboard-card" href="trainee-performance.html">
+                    <div class="card-icon">TP</div>
+                    <div>
+                        <h2>Trainee Performance</h2>
+                        <p>Monitor participation, assessments<br> and trainee progress.</p>
+                    </div>
+                    <span class="arrow">➜</span>
+                </a>
+
+            </section>
+
+        </main>
+
+        <footer class="dashboard-footer">
+            <p>Capacity Connect &middot; Digital Capacity Building &amp; Learning Management Portal</p>
+        </footer>
+
+    </div>
+
+    <script src="../trainer_script/trainer-dashboard.js"></script>
+</body>
+</html>
