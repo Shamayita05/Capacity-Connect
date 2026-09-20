@@ -104,7 +104,7 @@ CC.confirm = function (title, message, onConfirm, confirmLabel = "Confirm") {
 CC.go = (page) => { window.location.href = page; };
 CC.logout = () => {
   CC.toast("Logged out successfully", "info");
-  setTimeout(() => CC.go("index.html#login"), 500);
+  setTimeout(() => CC.go(".././Landing_Page/Landing_Page.html"), 500);
 };
 
 /** Renders the shared sticky navbar into <header data-navbar>. */
@@ -115,14 +115,14 @@ CC.renderNavbar = function () {
   host.className = "navbar";
   host.innerHTML = `
     <div class="container">
-      <a class="brand" href="${isAdmin ? "admin-dashboard.html" : "index.html"}">
+      <a class="brand" href="${isAdmin ? ".././Landing_Page/Landing_Page.html" : ".././Landing_Page/Landing_Page.html"}">
         <div class="brand-title">
     <span class="brand-capacity">CAPACITY</span>
     <span class="brand-connect">CONNECT</span>
       </div>
       </a>
       <nav class="nav-actions">
-        <a class="btn btn-ghost" href="index.html">${CC.icons.home}<span>Home</span></a>
+        <a class="btn btn-ghost" href=".././Landing_Page/Landing_Page.html">${CC.icons.home}<span>Home</span></a>
         ${isAdmin
           ? `<button class="btn btn-primary" id="logoutBtn">${CC.icons.logout}<span>Logout</span></button>`
           : `<a class="btn btn-primary" href="#login">${CC.icons.teacher}<span>Login</span></a>`}

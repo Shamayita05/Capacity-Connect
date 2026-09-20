@@ -25,6 +25,14 @@ function closeMenu() {
 /* =========================================================================
    01. TABS (Trainee / Trainer / Admin)
    ========================================================================= */
+let selectedRole = "trainee"; // Tracks active tab role
+
+const dashboardRoutes = {
+    trainee: "trainee-dashboard.html",
+    trainer: ".././Trainer_Dashboard/trainer_index/trainer-dashboard.html",
+    admin: ".././Admin/admin-dashboard.html"    
+};
+
 const tabsWrap = document.querySelector(".tabs");
 const tabs = document.querySelectorAll(".tab");
 
@@ -33,6 +41,8 @@ tabs.forEach((tab, index) => {
         tabs.forEach(item => item.classList.remove("active")); 
         this.classList.add("active");                          
 
+        // Store selected role
+        selectedRole = this.getAttribute("data-role") || "trainee";
         tabsWrap.style.setProperty("--tab-index", index);
     });
 });
@@ -51,7 +61,6 @@ loginForm.addEventListener("submit", function (event) {
     const passInput = loginForm.querySelector('input[type="password"]');
 
     let hasError = false;
-
 
     [userInput, passInput].forEach(field => {
         const box = field.closest(".input-box");
@@ -76,12 +85,16 @@ loginForm.addEventListener("submit", function (event) {
         loginBtn.classList.add("success");
         loginBtn.innerHTML = "Success <span>&#10003;</span>";
 
+        // Redirect based on active login tab
+        const targetDashboard = dashboardRoutes[selectedRole] || dashboardRoutes.trainee;
+
         setTimeout(() => {
+            window.location.href = targetDashboard;
             loginBtn.classList.remove("success");
             loginBtn.innerHTML = "Login <span>&rarr;</span>";
             loginForm.reset();
-        }, 1500);
-    }, 1200);
+        }, 1200);
+    }, 1000);
 });
 
 loginForm.querySelectorAll("input").forEach(field => {
@@ -774,23 +787,48 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
   });
 
   // [CHANGED] SIGNUP-MODAL: ager submit er vitorer submit code ta ekhon ei function e (Yes click korle chole)
-  async function doSubmit() {
-    if (!roleSel.value || !validate()) return;   // Yes chapar age kichu bodle gele abar check
+  // async function doSubmit() {
+  //   if (!roleSel.value || !validate()) return;   // Yes chapar age kichu bodle gele abar check
 
-    const cfg = CONFIG[roleSel.value];
-    setBusy(true);
-    try {
-      await submitToServer(new FormData(form));
-      resetAll();
-      // [CHANGED] SIGNUP-MODAL: age form er vitore showMsg('ok', ...) hoto. Ekhon popup bondho + top e scroll + upore success message,
-      // ei kaj gulo niche "popup open / close" section e ("signup:success" event listen kore) kora hoy
-      document.dispatchEvent(new CustomEvent('signup:success', { detail: { message: cfg.done } }));
-    } catch (err) {
-      showMsg('err', 'Something went wrong. Please try again.');
-    } finally {
-      setBusy(false);
-    }
+  //   const cfg = CONFIG[roleSel.value];
+  //   setBusy(true);
+  //   try {
+  //     await submitToServer(new FormData(form));
+  //     resetAll();
+  //     // [CHANGED] SIGNUP-MODAL: age form er vitore showMsg('ok', ...) hoto. Ekhon popup bondho + top e scroll + upore success message,
+  //     // ei kaj gulo niche "popup open / close" section e ("signup:success" event listen kore) kora hoy
+  //     document.dispatchEvent(new CustomEvent('signup:success', { detail: { message: cfg.done } }));
+  //   } catch (err) {
+  //     showMsg('err', 'Something went wrong. Please try again.');
+  //   } finally {
+  //     setBusy(false);
+  //   }
+  // }
+
+  async function doSubmit() {
+  if (!roleSel.value || !validate()) return;
+
+  const cfg = CONFIG[roleSel.value];
+  const currentRole = roleSel.value; // <-- Store role before form resets
+
+  setBusy(true);
+  try {
+    await submitToServer(new FormData(form));
+    resetAll();
+    
+    // Pass role in event detail
+    document.dispatchEvent(new CustomEvent('signup:success', { 
+      detail: { 
+        message: cfg.done,
+        role: currentRole 
+      } 
+    }));
+  } catch (err) {
+    showMsg('err', 'Something went wrong. Please try again.');
+  } finally {
+    setBusy(false);
   }
+}
 
   /* [REMOVED] SIGNUP-MODAL: purano "Back button" block (confirm + landing.html e jaowa) muche deya holo.
      Ekhon back button popup bondho kore, ta niche MODAL section e handle kora ache. */
@@ -852,11 +890,19 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
         successBar.classList.remove("is-open");
     }
     successClose.addEventListener("click", hideSuccess);
-
+// ***************************************************************************
     document.addEventListener("signup:success", (e) => {
         closeSignup();
         window.scrollTo({ top: 0, behavior: "smooth" });
         showSuccess(e.detail && e.detail.message);
+
+        // Read chosen role from event detail or fall back to selected role
+        const chosenRole = e.detail?.role || document.getElementById("role")?.value || "trainee";
+        const targetDashboard = dashboardRoutes[chosenRole] || dashboardRoutes.trainee;
+
+        setTimeout(() => {
+            window.location.href = targetDashboard;
+        }, 1500);
     });
 
     openLink.addEventListener("click", openSignup);

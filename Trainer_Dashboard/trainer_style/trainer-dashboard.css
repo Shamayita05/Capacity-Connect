@@ -133,10 +133,10 @@ a {
 }
 
 .trainer-animation {
-    width: 100%;
-    height: 100%;
+    width: 111%;
+    height: 111%;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 20px;
     display: block;
 }
 

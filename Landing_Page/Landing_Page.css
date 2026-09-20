@@ -21,6 +21,7 @@
 html{scroll-behavior:smooth;}
 
 body{
+  font-family: Arial, Helvetica, sans-serif;
   /* font-family:"Poppins","Segoe UI",Arial,sans-serif; */
   color:var(--navy);
   background:#fff;
@@ -64,21 +65,20 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ==================== NAVBAR ==================== */
 .navbar{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:24px;
-  padding:14px 44px;
-  background:#fff;
-  border-bottom:3px solid var(--line);
-  border-color: lightgray;
-  z-index:30;
+  min-height: 70px;
+    padding: 0 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
 }
 
 .brand{display:flex;align-items:center;gap:15px;}
 .brand-name{
   display:flex;flex-direction:column;line-height:1.05;
-  font-weight:800;font-size:18px;letter-spacing:.4px;margin-top: 10px;
+  font-weight:800;font-size:17px;letter-spacing:-0.2px;
 }
 .brand-top{color:var(--navy);}
 .brand-bottom{color:var(--teal);}
@@ -268,6 +268,8 @@ button{font-family:inherit;cursor:pointer;}
     display:flex;
     position:relative;
     isolation:isolate;
+    justify-content:center;
+    align-items:center;
 
     background:rgba(255,255,255,.82);
     backdrop-filter:blur(14px);
@@ -296,9 +298,11 @@ button{font-family:inherit;cursor:pointer;}
     z-index:6;
 }
 
+
 .portal-form{
-    width:57%;
+    width:100%;
     max-width:600px;
+    margin:0 auto;
     padding:34px 36px;
     position:relative;
     z-index:4;
@@ -739,7 +743,6 @@ button{font-family:inherit;cursor:pointer;}
         transition-duration:.01ms !important;
     }
 } */
-
 
 /* ==================== STATICS SECTION  ==================== */
 
@@ -1245,17 +1248,17 @@ SECTION TITLE
 }
 
 .footer-copyright{
-    font-size:14px;
+    font-size:15px;
     color:rgba(255,255,255,.85);
     letter-spacing:.3px;
     line-height:1.6;
     animation:fadeUp .7s var(--ease) .4s both;
 }
-.footer-copyright .heart{
+/* .footer-copyright .heart{
     display:inline-block;
     color:#ffdce3;
     animation:heartBeat 1.6s ease-in-out infinite;
-}
+} */
 .footer-copyright a{
     color:#fff;
     text-decoration:underline;
