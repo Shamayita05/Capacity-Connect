@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Monitoring – Capacity Connect</title>
+  <meta name="description" content="Capacity Connect admin course monitoring dashboard." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="course-monitoring">
+  <header data-navbar></header>
+
+  <main class="page container">
+    <a class="back-link" href="admin-dashboard.html"><span data-icon="back"></span> Back to dashboard</a>
+
+    <div class="page-header">
+      <div>
+        <h1>Course Monitoring</h1>
+        <p>Manage courses, learning content, assessments and course progress.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-4">
+      <article class="card task-card reveal" data-href="course-management.html" style="--accent:var(--sage)">
+        <span class="task-icon" data-icon="book"></span>
+        <div><h3 class="card-title">Course Approval &amp; Management</h3><p class="card-sub">Review courses submitted by trainers.</p></div>
+        <ul><li>Title, trainer, category, duration</li><li>Approve / Reject</li><li>Edit or remove</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+
+      <article class="card task-card reveal" data-href="content-management.html" style="--accent:var(--aqua)">
+        <span class="task-icon" data-icon="video"></span>
+        <div><h3 class="card-title">Video &amp; Learning Content</h3><p class="card-sub">Review uploaded lectures and materials.</p></div>
+        <ul><li>Videos, PDFs, presentations</li><li>Upload date &amp; trainer</li><li>Approve / Reject</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+
+      <article class="card task-card reveal" data-href="assessment-management.html" style="--accent:var(--mint)">
+        <span class="task-icon" data-icon="clipboard"></span>
+        <div><h3 class="card-title">Assessment Approval</h3><p class="card-sub">Review trainer-created assessments.</p></div>
+        <ul><li>Questions &amp; course</li><li>Deadline &amp; status</li><li>Approve / Reject</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+
+      <article class="card task-card reveal" data-href="course-progress.html" style="--accent:var(--sage-dark)">
+        <span class="task-icon" data-icon="clock"></span>
+        <div><h3 class="card-title">Course Progress &amp; Deadlines</h3><p class="card-sub">Track completion and upcoming deadlines.</p></div>
+        <ul><li>Completion percentage</li><li>Enrolled trainees</li><li>Assessment deadlines</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+    </div>
+  </main>
+
+  <footer><div class="container">© 2026 Capacity Connect • Learn • Develop • Grow</div></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

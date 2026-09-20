@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Monitoring – Capacity Connect</title>
+  <meta name="description" content="Capacity Connect admin user monitoring dashboard." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="user-monitoring">
+  <header data-navbar></header>
+
+  <main class="page container">
+    <a class="back-link" href="admin-dashboard.html"><span data-icon="back"></span> Back to dashboard</a>
+
+    <div class="page-header">
+      <div>
+        <h1>User Monitoring</h1>
+        <p>Review users, registrations, roles and certifications.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-4">
+      <article class="card task-card reveal" data-href="trainer-approvals.html" style="--accent:var(--aqua)">
+        <span class="task-icon" data-icon="teacher"></span>
+        <div><h3 class="card-title">Trainer Approvals</h3><p class="card-sub">Review newly registered trainers.</p></div>
+        <ul><li>View trainer details</li><li>Qualification &amp; expertise</li><li>Approve / Reject</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+
+      <article class="card task-card reveal" data-href="trainee-approvals.html" style="--accent:var(--sage)">
+        <span class="task-icon" data-icon="student"></span>
+        <div><h3 class="card-title">Trainee Approval</h3><p class="card-sub">Approve registered trainees.</p></div>
+        <ul><li>View trainee profile</li><li>Registration status</li><li>Approve / Reject</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+
+      <article class="card task-card reveal" data-href="competency-mapping.html" style="--accent:var(--mint)">
+    <span class="task-icon">
+    <img src="assets/target.png" alt="Competency Mapping">
+</span>
+
+    <div>
+        <h3 class="card-title">Competency Mapping</h3>
+        <p class="card-sub">
+            Match subjects and skills with suitable trainers.
+        </p>
+    </div>
+
+    <ul>
+        <li>Select subject or skill</li>
+        <li>View matching trainers</li>
+        <li>Review and assign trainer</li>
+    </ul>
+
+    <span class="card-cta">
+        Open <span data-icon="arrow"></span>
+    </span>
+</article>
+
+      <article class="card task-card reveal" data-href="certification-management.html" style="--accent:var(--sage-dark)">
+        <span class="task-icon" data-icon="award"></span>
+        <div><h3 class="card-title">Certification Management</h3><p class="card-sub">Issue certificates for completed courses.</p></div>
+        <ul><li>Completed courses</li><li>Certification requests</li><li>Approve / issue certificates</li></ul>
+        <span class="card-cta">Open <span data-icon="arrow"></span></span>
+      </article>
+    </div>
+  </main>
+
+  <footer><div class="container">© 2026 Capacity Connect • Learn • Develop • Grow</div></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
