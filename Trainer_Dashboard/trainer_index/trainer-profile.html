@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trainer Profile | Capacity Connect</title>
+    <link rel="stylesheet" href="../trainer_style/trainer-profile.css">
+</head>
+<body>
+
+<div class="profile-shell">
+
+    <header class="topbar">
+        <a href="trainer-dashboard.html" class="brand" aria-label="Trainer dashboard">
+            <span class="brand-title">CAPACITY<br><span class="brand-highlight">CONNECT</span></span>
+        </a>
+
+        <nav class="main-nav" aria-label="Profile navigation">
+            <a href="trainer-dashboard.html">Dashboard</a>
+            <a href="../../Landing_Page/Landing_Page.html">Log out</a>
+        </nav>
+    </header>
+
+    <main class="profile-content">
+
+        <section class="profile-heading">
+            <div>
+                <span class="eyebrow">TRAINER PROFILE</span>
+                <h1>Manage your profile</h1>
+                <p>Review your account information and keep your trainer details up to date.</p>
+            </div>
+            <button class="btn secondary" type="button" id="cancelTopBtn">Cancel</button>
+        </section>
+
+        <form id="profileForm" novalidate>
+
+            <section class="profile-card profile-identity">
+                <div class="avatar-section">
+                    <div class="avatar" id="profileAvatar" aria-label="Trainer profile image">TR</div>
+                    <div class="avatar-actions">
+                        <h2 id="profileDisplayName">Trainer</h2>
+                        <p id="profileDisplayRole">Trainer</p>
+                        <label class="upload-btn" for="profileImage">
+                            Change profile image
+                        </label>
+                        <input id="profileImage" type="file" accept="image/png,image/jpeg,image/jpg,image/webp">
+                        <button class="remove-image" type="button" id="removeImageBtn">Remove image</button>
+                        <small>Optional. JPG, PNG or WEBP.</small>
+                    </div>
+                </div>
+
+                <div class="account-status">
+                    <span class="status-dot"></span>
+                    <span>Trainer account</span>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <div class="section-title">
+                    <div>
+                        <h2>Account details</h2>
+                        <p>Account identity and contact information.</p>
+                    </div>
+                    <span class="locked-note">Protected fields are read-only</span>
+                </div>
+
+                <div class="form-grid three">
+                    <div class="field">
+                        <label for="role">Register as</label>
+                        <input id="role" value="Trainer" readonly>
+                    </div>
+
+                    <div class="field">
+                        <label for="fullName">Full name</label>
+                        <input id="fullName" readonly>
+                    </div>
+
+                    <div class="field editable-field">
+                        <label for="email">Email <span>*</span></label>
+                        <input id="email" type="email" required>
+                    </div>
+
+                    <div class="field editable-field">
+                        <label for="mobile">Mobile number <span>*</span></label>
+                        <input id="mobile" type="tel" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" value="••••••••" readonly>
+                        <small>Password is protected. Use account security settings to change it.</small>
+                    </div>
+
+                    <div class="field">
+                        <label for="confirmPassword">Confirm password</label>
+                        <input id="confirmPassword" type="password" value="••••••••" readonly>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <div class="section-title">
+                    <div>
+                        <h2>Professional details</h2>
+                        <p>Details collected when the trainer account was created.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid three">
+                    <div class="field">
+                        <label for="designation">Designation</label>
+                        <input id="designation" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="organization">Organization / department</label>
+                        <input id="organization" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="employeeId">Employee ID</label>
+                        <input id="employeeId" readonly>
+                    </div>
+                    <div class="field editable-field">
+                        <label for="officeRegion">Office / regional centre</label>
+                        <input id="officeRegion">
+                    </div>
+                    <div class="field editable-field">
+                        <label for="trainingExperience">Training experience (years)</label>
+                        <input id="trainingExperience" type="text">
+                    </div>
+                    <div class="field editable-field">
+                        <label for="languages">Languages known</label>
+                        <input id="languages" type="text">
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <div class="section-title">
+                    <div>
+                        <h2>Qualifications</h2>
+                        <p>Academic information provided during registration.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid three">
+                    <div class="field">
+                        <label for="highestQualification">Highest qualification</label>
+                        <input id="highestQualification" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="institution">Institution / university</label>
+                        <input id="institution" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="passingYear">Year of passing</label>
+                        <input id="passingYear" readonly>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <div class="section-title">
+                    <div>
+                        <h2>Competency mapping</h2>
+                        <p>Manage the trainer information used for course and training allocation.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid three">
+                    <div class="field editable-field">
+                        <label for="subjectExpertise">Subject expertise <span>*</span></label>
+                        <input id="subjectExpertise" required>
+                    </div>
+                    <div class="field editable-field">
+                        <label for="keySkills">Key skills</label>
+                        <input id="keySkills">
+                    </div>
+                    <div class="field editable-field">
+                        <label for="proficiencyLevel">Proficiency level</label>
+                        <select id="proficiencyLevel">
+                            <option value="">Select</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                            <option>Expert</option>
+                        </select>
+                    </div>
+                    <div class="field editable-field">
+                        <label for="preferredMode">Preferred training mode</label>
+                        <select id="preferredMode">
+                            <option value="">Select</option>
+                            <option>Classroom</option>
+                            <option>Online</option>
+                            <option>Hybrid</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <div class="section-title">
+                    <div>
+                        <h2>Bio and documents</h2>
+                        <p>Optional information that helps trainees understand the trainer's expertise.</p>
+                    </div>
+                </div>
+
+                <div class="field editable-field">
+                    <label for="bio">Short bio</label>
+                    <textarea id="bio" rows="5"></textarea>
+                </div>
+
+                <div class="document-grid">
+                    <div class="document-box">
+                        <span class="document-icon">ID</span>
+                        <div>
+                            <strong>Profile photo</strong>
+                            <small id="imageFileName">No image uploaded</small>
+                        </div>
+                    </div>
+                    <div class="document-box protected-document">
+                        <span class="document-icon">CV</span>
+                        <div>
+                            <strong>Resume / CV</strong>
+                            <small>Registration document • Protected</small>
+                        </div>
+                    </div>
+                    <div class="document-box protected-document">
+                        <span class="document-icon">CERT</span>
+                        <div>
+                            <strong>Certificates</strong>
+                            <small>Registration documents • Protected</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button class="btn secondary" type="button" id="cancelBtn">Cancel</button>
+                <button class="btn primary" type="submit">Save profile changes</button>
+            </div>
+
+            <p class="save-message" id="saveMessage" role="status"></p>
+        </form>
+    </main>
+
+    <footer class="profile-footer">
+        <p>&copy; <span id="year">2026</span> Capacity Connect.</p>
+    </footer>
+
+</div>
+
+<script src="../trainer_script/trainer-profile.js"></script>
+</body>
+</html>

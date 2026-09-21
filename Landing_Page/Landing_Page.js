@@ -55,45 +55,190 @@ const loginForm = document.getElementById("loginForm");
 const loginBtn  = loginForm.querySelector(".main-login");
 
 loginForm.addEventListener("submit", function (event) {
-    event.preventDefault(); 
 
-    const userInput = loginForm.querySelector('input[type="text"]');
-    const passInput = loginForm.querySelector('input[type="password"]');
+    event.preventDefault();
+
+    const userInput =
+        loginForm.querySelector('input[type="text"]');
+
+    const passInput =
+        loginForm.querySelector('input[type="password"]');
 
     let hasError = false;
 
+
+    /* ============================================
+       BASIC EMPTY-FIELD VALIDATION
+    ============================================ */
+
     [userInput, passInput].forEach(field => {
-        const box = field.closest(".input-box");
+
+        const box =
+            field.closest(".input-box");
+
         box.classList.remove("error");
 
         if (!field.value.trim()) {
+
             void box.offsetWidth;
+
             box.classList.add("error");
+
             hasError = true;
         }
     });
 
+
     if (hasError) {
-        userInput.value.trim() ? passInput.focus() : userInput.focus();
+
+        userInput.value.trim()
+            ? passInput.focus()
+            : userInput.focus();
+
         return;
     }
 
-    loginBtn.classList.add("loading");
 
-    setTimeout(() => {
-        loginBtn.classList.remove("loading");
-        loginBtn.classList.add("success");
-        loginBtn.innerHTML = "Success <span>&#10003;</span>";
+    /* ============================================
+       TRAINER LOGIN
+    ============================================ */
 
-        // Redirect based on active login tab
-        const targetDashboard = dashboardRoutes[selectedRole] || dashboardRoutes.trainee;
+    if (selectedRole === "trainer") {
+
+        let trainerAccount = null;
+
+        try {
+
+            trainerAccount =
+                JSON.parse(
+                    localStorage.getItem(
+                        "capacityConnectTrainerAccount"
+                    )
+                );
+
+        } catch (error) {
+
+            console.error(
+                "Unable to read trainer account:",
+                error
+            );
+        }
+
+
+        /* No trainer account exists */
+
+        if (!trainerAccount) {
+
+            alert(
+                "No trainer account found. Please create a trainer account first."
+            );
+
+            return;
+        }
+
+
+        /* ========================================
+           CHECK EMAIL + PASSWORD
+        ======================================== */
+
+        const enteredEmail =
+            userInput.value.trim();
+
+        const enteredPassword =
+            passInput.value;
+
+
+        const emailMatches =
+            enteredEmail.toLowerCase() ===
+            trainerAccount.email.toLowerCase();
+
+        const passwordMatches =
+            enteredPassword ===
+            trainerAccount.password;
+
+
+        if (!emailMatches || !passwordMatches) {
+
+            alert(
+                "Invalid trainer email or password."
+            );
+
+            passInput.value = "";
+
+            passInput.focus();
+
+            return;
+        }
+
+
+        /* ========================================
+           LOGIN SUCCESS
+        ======================================== */
+
+        loginBtn.classList.add("loading");
+
 
         setTimeout(() => {
-            window.location.href = targetDashboard;
+
+            loginBtn.classList.remove("loading");
+
+            loginBtn.classList.add("success");
+
+            loginBtn.innerHTML =
+                "Success <span>&#10003;</span>";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    dashboardRoutes.trainer;
+
+            }, 1200);
+
+        }, 1000);
+
+
+        return;
+    }
+
+
+    /* ============================================
+       OTHER ROLES
+       Keep your existing prototype behaviour
+    ============================================ */
+
+    loginBtn.classList.add("loading");
+
+
+    setTimeout(() => {
+
+        loginBtn.classList.remove("loading");
+
+        loginBtn.classList.add("success");
+
+        loginBtn.innerHTML =
+            "Success <span>&#10003;</span>";
+
+
+        const targetDashboard =
+            dashboardRoutes[selectedRole] ||
+            dashboardRoutes.trainee;
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                targetDashboard;
+
             loginBtn.classList.remove("success");
-            loginBtn.innerHTML = "Login <span>&rarr;</span>";
+
+            loginBtn.innerHTML =
+                "Login <span>&rarr;</span>";
+
             loginForm.reset();
+
         }, 1200);
+
     }, 1000);
 });
 
@@ -710,19 +855,158 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
     if (msg.classList.contains('err')) clearMsg();
   });
 
-  /* ---------- Submit ---------- */
-  async function submitToServer(data) {
-    // TODO: replace this with your real API call, for example:
-    //
-    // const res = await fetch('/api/register', { method: 'POST', body: data });
-    // if (!res.ok) throw new Error('Request failed');
-    //
-    // `data` is a FormData object: only the fields of the selected role are included.
-    console.log('Form data:', Object.fromEntries(
-      Array.from(data.entries()).filter(([k]) => k !== 'password' && k !== 'confirmPassword')
-    ));
-    return new Promise((resolve) => setTimeout(resolve, 700));
-  }
+
+async function submitToServer(data) {
+
+    const formData = Object.fromEntries(data.entries());
+
+    console.log(
+        "Form data:",
+        Object.fromEntries(
+            Object.entries(formData).filter(
+                ([key]) =>
+                    key !== "password" &&
+                    key !== "confirmPassword"
+            )
+        )
+    );
+
+
+    /* =====================================================
+       TRAINER ACCOUNT
+       Save both:
+       1. Trainer profile
+       2. Login credentials
+    ===================================================== */
+
+    if (formData.role === "trainer") {
+
+        const trainerProfile = {
+
+            role: "Trainer",
+
+            fullName:
+                formData.fullName ||
+                formData.name ||
+                "",
+
+            email:
+                formData.email ||
+                "",
+
+            mobile:
+                formData.mobile ||
+                formData.phone ||
+                "",
+
+            designation:
+                formData.designation ||
+                "",
+
+            organization:
+                formData.organization ||
+                "",
+
+            employeeId:
+                formData.employeeId ||
+                "",
+
+            officeRegion:
+                formData.officeRegion ||
+                formData.officeRegionalCentre ||
+                "",
+
+            trainingExperience:
+                formData.trainingExperience ||
+                formData.experience ||
+                "",
+
+            languages:
+                formData.languages ||
+                formData.languagesKnown ||
+                "",
+
+            highestQualification:
+                formData.highestQualification ||
+                "",
+
+            institution:
+                formData.institution ||
+                formData.institutionUniversity ||
+                "",
+
+            passingYear:
+                formData.passingYear ||
+                "",
+
+            subjectExpertise:
+                formData.subjectExpertise ||
+                "",
+
+            keySkills:
+                formData.keySkills ||
+                "",
+
+            proficiencyLevel:
+                formData.proficiencyLevel ||
+                "",
+
+            preferredMode:
+                formData.preferredMode ||
+                "",
+
+            bio:
+                formData.bio ||
+                "",
+
+            profileImage: "",
+            imageFileName: ""
+        };
+
+
+        /* Save trainer profile */
+
+        localStorage.setItem(
+            "capacityConnectTrainerProfile",
+            JSON.stringify(trainerProfile)
+        );
+
+
+        /* =================================================
+           SAVE LOGIN ACCOUNT
+        ================================================= */
+
+        const trainerAccount = {
+
+            role: "trainer",
+
+            email:
+                formData.email ||
+                "",
+
+            password:
+                formData.password ||
+                ""
+        };
+
+
+        localStorage.setItem(
+            "capacityConnectTrainerAccount",
+            JSON.stringify(trainerAccount)
+        );
+
+
+        console.log(
+            "Trainer account and profile saved successfully."
+        );
+    }
+
+
+    return new Promise((resolve) => {
+        setTimeout(resolve, 700);
+    });
+}
+
 
   function setBusy(busy) {
     submitBtn.disabled = busy;
@@ -785,25 +1069,6 @@ document.querySelector(".signup-btn").addEventListener("click", () => {
     closeConfirm();
     doSubmit();
   });
-
-  // [CHANGED] SIGNUP-MODAL: ager submit er vitorer submit code ta ekhon ei function e (Yes click korle chole)
-  // async function doSubmit() {
-  //   if (!roleSel.value || !validate()) return;   // Yes chapar age kichu bodle gele abar check
-
-  //   const cfg = CONFIG[roleSel.value];
-  //   setBusy(true);
-  //   try {
-  //     await submitToServer(new FormData(form));
-  //     resetAll();
-  //     // [CHANGED] SIGNUP-MODAL: age form er vitore showMsg('ok', ...) hoto. Ekhon popup bondho + top e scroll + upore success message,
-  //     // ei kaj gulo niche "popup open / close" section e ("signup:success" event listen kore) kora hoy
-  //     document.dispatchEvent(new CustomEvent('signup:success', { detail: { message: cfg.done } }));
-  //   } catch (err) {
-  //     showMsg('err', 'Something went wrong. Please try again.');
-  //   } finally {
-  //     setBusy(false);
-  //   }
-  // }
 
   async function doSubmit() {
   if (!roleSel.value || !validate()) return;

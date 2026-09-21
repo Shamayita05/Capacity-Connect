@@ -1,25 +1,51 @@
-// ================================
+// ============================================
 // CAPACITY CONNECT - TRAINER DASHBOARD
-// ================================
+// ============================================
 
-// Change this value to the logged-in trainer's name.
-// In a connected backend, this can be loaded from the user's profile/session.
-const trainerName = "Trainer";
+const STORAGE_KEY = "capacityConnectTrainerProfile";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const nameElement = document.getElementById("trainerName");
 
-    if (nameElement) {
-        nameElement.textContent = trainerName;
+    const nameElement =
+        document.getElementById("trainerName");
+
+    // Read the trainer profile saved during signup
+    let profile = {};
+
+    try {
+
+        profile =
+            JSON.parse(
+                localStorage.getItem(STORAGE_KEY)
+            ) || {};
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load trainer profile:",
+            error
+        );
     }
 
-    // Prevent accidental navigation for placeholder pages that do not exist yet.
-    // Remove this block if all target pages are already connected to your project.
-    const cards = document.querySelectorAll(".dashboard-card");
+    // Show trainer's actual name
+    if (nameElement) {
+
+        nameElement.textContent =
+            profile.fullName || "Trainer";
+    }
+
+    // Prevent accidental navigation animation
+    const cards =
+        document.querySelectorAll(".dashboard-card");
 
     cards.forEach((card) => {
+
         card.addEventListener("click", () => {
+
             card.classList.add("card-clicked");
+
         });
+
     });
+
 });
