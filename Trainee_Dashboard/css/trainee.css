@@ -20,7 +20,7 @@
   --radius-lg: 16px;
   --radius-md: 10px;
   --radius-sm: 6px;
-  --font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -41,7 +41,7 @@ body {
 
 /* --- NAVBAR --- */
 .navbar {
-  background-color: var(--white);
+  /* background-color: var(--white);
   border-bottom: 2px solid var(--gray-200);
   padding: 14px 32px;
   display: flex;
@@ -50,27 +50,35 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-sm); */
+    min-height: 70px;
+    padding: 0 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d7edf2;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
 }
 
 .brand-logo {
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  line-height: 0.95;
+  line-height: 1.05;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
 }
 
 .brand-logo .capacity {
   color: var(--navy);
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .brand-logo .connect {
   color: #05a86a; /* High contrast mint green */
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .nav-links {

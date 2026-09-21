@@ -28,7 +28,7 @@ function closeMenu() {
 let selectedRole = "trainee"; // Tracks active tab role
 
 const dashboardRoutes = {
-    trainee: "trainee-dashboard.html",
+    trainee: ".././Trainee_Dashboard/trainee-dashboard.html",
     trainer: ".././Trainer_Dashboard/trainer_index/trainer-dashboard.html",
     admin: ".././Admin/admin-dashboard.html"    
 };
