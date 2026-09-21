@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Course Feedback — Capacity Connect</title>
+    <meta
+      name="description"
+      content="Rate your Capacity Connect course, content and trainer, and share what worked well and what could be improved."
+    />
+    <link rel="stylesheet" href="css/trainee_feed.css" />
+    <!-- Custom Hardcoded Navbar -->
+<nav class="custom-navbar">
+  <div class="nav-container">
+    <a href="trainee-dashboard.html" class="nav-brand">
+      <span class="brand-top">CAPACITY</span>
+      <span class="brand-bottom">CONNECT</span>
+    </a>
+    <div class="nav-right">
+      <a href="trainee-dashboard.html" class="nav-link">Dashboard</a>
+      <a href="login.html" class="btn-logout">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+/* Custom Header Navbar Layout */
+.custom-navbar {
+  background-color: #ffffff;
+  border-top: 6px solid #0a4d44; /* Dark green accent bar at top */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.nav-container {
+  max-width: none;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Brand Logo */
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.95;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.brand-top {
+  color: #023047; /* Navy blue */
+}
+
+.brand-bottom {
+  color: #00b074; /* Vibrant green */
+}
+
+/* Right Items */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #023047;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+  color: #00b074;
+}
+
+/* Logout Button */
+.btn-logout {
+  color: #023047;
+  border: 1.5px solid #023047;
+  background-color: transparent;
+  padding: 6px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #023047;
+  color: #ffffff;
+}
+
+/* Full-Width Footer Box Container */
+.footer {
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #cbd5e1; /* Subtle top border line */
+  padding: 24px 0;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered Content Styling */
+.footer-content {
+  width: 100%;
+  text-align: center;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--gray-600);
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+</style>
+</head>
+    <main class="page">
+      <div class="wrap">
+        <div class="section__head">
+          <div>
+            <h1>Course Feedback</h1>
+            <p class="muted">Your honest feedback helps trainers improve every cohort.</p>
+          </div>
+        </div>
+
+        <div id="feedback-shell">
+          <p
+            class="card"
+            id="fb-success"
+            hidden
+            role="status"
+            style="border-left: 5px solid #80ed99; font-weight: 600"
+          ></p>
+
+          <form class="card" id="form-feedback" novalidate>
+            <div class="field-grid">
+              <div class="field">
+                <label for="fb-course">Course <span aria-hidden="true">*</span></label>
+                <select id="fb-course" required></select>
+              </div>
+              <div class="field">
+                <label for="fb-trainer">Trainer</label>
+                <input id="fb-trainer" type="text" readonly disabled />
+                <p class="hint">Filled automatically from the selected course.</p>
+              </div>
+            </div>
+            <p class="badge badge--warn" id="fb-existing" hidden style="display: block; margin-bottom: 16px"></p>
+
+            <fieldset>
+              <legend>Ratings</legend>
+              <div class="field-grid">
+                <div class="field">
+                  <label id="lbl-overall">Overall Course Rating <span aria-hidden="true">*</span></label>
+                  <div class="stars" data-stars="overall" aria-labelledby="lbl-overall"></div>
+                </div>
+                <div class="field">
+                  <label id="lbl-content">Course Content Rating <span aria-hidden="true">*</span></label>
+                  <div class="stars" data-stars="content" aria-labelledby="lbl-content"></div>
+                </div>
+                <div class="field">
+                  <label id="lbl-trainer">Trainer Rating <span aria-hidden="true">*</span></label>
+                  <div class="stars" data-stars="trainer" aria-labelledby="lbl-trainer"></div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Course Difficulty <span aria-hidden="true">*</span></legend>
+              <div class="radio-row">
+                <label><input type="radio" name="difficulty" value="Too Easy" /> Too Easy</label>
+                <label><input type="radio" name="difficulty" value="Easy" /> Easy</label>
+                <label><input type="radio" name="difficulty" value="Appropriate" /> Appropriate</label>
+                <label><input type="radio" name="difficulty" value="Difficult" /> Difficult</label>
+                <label><input type="radio" name="difficulty" value="Too Difficult" /> Too Difficult</label>
+              </div>
+            </fieldset>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="fb-quality">Content Quality <span aria-hidden="true">*</span></label>
+                <select id="fb-quality" required>
+                  <option value="">Select</option>
+                  <option>Excellent</option>
+                  <option>Good</option>
+                  <option>Average</option>
+                  <option>Poor</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fb-resources">Learning Resources Quality <span aria-hidden="true">*</span></label>
+                <select id="fb-resources" required>
+                  <option value="">Select</option>
+                  <option>Excellent</option>
+                  <option>Good</option>
+                  <option>Average</option>
+                  <option>Poor</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="fb-liked">What did you like about the course? <span aria-hidden="true">*</span></label>
+              <textarea id="fb-liked" required></textarea>
+            </div>
+            <div class="field">
+              <label for="fb-improve">What could be improved?</label>
+              <textarea id="fb-improve"></textarea>
+            </div>
+            <div class="field">
+              <label for="fb-comments">Additional comments</label>
+              <textarea id="fb-comments"></textarea>
+            </div>
+
+            <fieldset>
+              <legend>Would you recommend this course? <span aria-hidden="true">*</span></legend>
+              <div class="radio-row">
+                <label><input type="radio" name="recommend" value="Yes" /> Yes</label>
+                <label><input type="radio" name="recommend" value="Maybe" /> Maybe</label>
+                <label><input type="radio" name="recommend" value="No" /> No</label>
+              </div>
+            </fieldset>
+
+            <p class="error-text" id="fb-error" role="alert"></p>
+            <button class="btn btn--primary" type="submit" id="fb-submit">Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Centered Box Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>© 2026 Capacity Connect.</p>
+  </div>
+</footer>
+
+    <script src="js/trainee-data_feed.js"></script>
+    <script src="js/trainee_feed.js"></script>
+    <script src="js/feedback.js"></script>
+    <script>
+      initFeedbackPage();
+    </script>
+  </body>
+</html>

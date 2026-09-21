@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications - Capacity Connect</title>
+  <link rel="stylesheet" href="css/trainee.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="trainee-dashboard.html" class="brand-logo"><span class="capacity">Capacity</span><span class="connect">Connect</span></a>
+    <ul class="nav-links">
+      <li><a href="trainee-dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><button id="nav-logout-btn" class="btn-logout">Logout</button></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h1>Notifications</h1>
+        <p>Stay informed on recent updates and platform announcements.</p>
+      </div>
+      <button class="btn btn-secondary" onclick="markAllRead()">Mark All as Read</button>
+    </div>
+
+    <div id="notifications-list"></div>
+  </main>
+
+  <footer class="footer">© 2026 Capacity Connect</footer>
+  <script src="js/trainee-data.js"></script>
+  <script src="js/trainee.js"></script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>
