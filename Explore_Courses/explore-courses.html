@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Courses - Capacity Connect</title>
+  <link rel="stylesheet" href="trainee.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../Landing_Page/Landing_Page.html" class="brand-logo"><span class="capacity">Capacity</span><span class="connect">Connect</span></a>
+    <ul class="nav-links">
+      <!-- <li><a href="trainee-dashboard.html" class="nav-link">Dashboard</a></li> -->
+      <li><button id="nav-logout-btn" class="btn-logout">Home</button></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Explore Courses</h1>
+      <p>Discover new skill-building programs and enroll today.</p>
+    </div>
+
+    <div class="filters-bar">
+      <input type="text" id="search-input" class="filter-input" placeholder="Search by course name or trainer...">
+      <select id="category-filter" class="filter-select">
+        <option value="">All Categories</option>
+        <option value="Data Science">Data Science</option>
+        <option value="Security">Security</option>
+      </select>
+      <select id="level-filter" class="filter-select">
+        <option value="">All Levels</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+      </select>
+    </div>
+
+    <div id="explore-courses-grid" class="courses-grid"></div>
+  </main>
+
+  <footer class="footer">© 2026 Capacity Connect</footer>
+  <script src="trainee-data.js"></script>
+  <script src="trainee.js"></script>
+  <script src="courses.js"></script>
+</body>
+</html>
