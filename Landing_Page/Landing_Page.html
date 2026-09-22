@@ -416,7 +416,7 @@
             <div class="field">
               <label for="t-office">Office / regional centre</label>
               <div class="select-wrap">
-                <select id="t-office" name="office">
+                <select id="t-office" name="officeRegion">
                   <option value="">Select</option>
                   <option>New Delhi (HQ)</option>
                   <option>Kolkata</option>
@@ -442,7 +442,7 @@
             <div class="field">
               <label for="t-qual">Highest qualification <span class="req" aria-hidden="true">*</span></label>
               <div class="select-wrap">
-                <select id="t-qual" name="qualification" required>
+                <select id="t-qual" name="highestQualification" required>
                   <option value="">Select</option>
                   <option>10+2</option>
                   <option>Graduate</option>
@@ -738,9 +738,9 @@
               <input id="tr-empid" name="employeeId" type="text" placeholder="Ex - IMD-10231">
             </div>
             <div class="field">
-              <label for="tr-office">Office / regional centre</label>
+              <label for="tr-office">Office / Regional Centre</label>
               <div class="select-wrap">
-                <select id="tr-office" name="office">
+                <select id="tr-office" name="officeRegion">
                   <option value="">Select</option>
                   <option>New Delhi (HQ)</option>
                   <option>Kolkata</option>
@@ -765,7 +765,7 @@
             <div class="field">
               <label for="tr-qual">Highest qualification <span class="req" aria-hidden="true">*</span></label>
               <div class="select-wrap">
-                <select id="tr-qual" name="qualification" required>
+                <select id="tr-qual" name="highestQualification" required>
                   <option value="">Select</option>
                   <option>Graduate</option>
                   <option>Post graduate</option>
@@ -779,7 +779,7 @@
             </div>
             <div class="field">
               <label for="tr-year">Year of passing <span class="req" aria-hidden="true">*</span></label>
-              <input id="tr-year" required class="js-year" name="yearOfPassing" type="number" inputmode="numeric" min="1950" placeholder="Ex - 2008" data-msg="Enter a valid year.">
+              <input id="tr-year" required class="js-year" name="passingYear" type="number" inputmode="numeric" min="1950" placeholder="Ex - 2008" data-msg="Enter a valid year.">
             </div>
           </div>
 
@@ -789,20 +789,20 @@
               <label for="tr-subjects">Subject expertise <span class="req" aria-hidden="true">*</span></label>
               <div class="tags" data-required data-required-msg="Add at least one subject of expertise.">
                 <input id="tr-subjects" class="tag-input" type="text" autocomplete="off" placeholder="Type a subject and press Enter">
-                <input type="hidden" name="subjects">
+                <input type="hidden" name="subjectExpertise">
               </div>
             </div>
             <div class="field">
               <label for="tr-skills">Key skills</label>
               <div class="tags">
                 <input id="tr-skills" class="tag-input" type="text" autocomplete="off" placeholder="Type a skill and press Enter">
-                <input type="hidden" name="skills">
+                <input type="hidden" name="keySkills">
               </div>
             </div>
             <div class="field">
               <label for="tr-level">Proficiency level <span class="req" aria-hidden="true">*</span></label>
               <div class="select-wrap">
-                <select id="tr-level" name="proficiency" required>
+                <select id="tr-level" name="proficiencyLevel" required>
                   <option value="">Select</option>
                   <option>Intermediate</option>
                   <option>Advanced</option>
@@ -813,7 +813,7 @@
             <div class="field">
               <label for="tr-mode">Preferred training mode <span class="req" aria-hidden="true">*</span></label>
               <div class="select-wrap">
-                <select id="tr-mode" name="trainingMode" required>
+                <select id="tr-mode" name="preferredMode" required>
                   <option value="">Select</option>
                   <option>Online</option>
                   <option>Offline</option>

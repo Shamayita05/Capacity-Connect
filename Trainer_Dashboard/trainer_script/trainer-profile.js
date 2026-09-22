@@ -286,60 +286,32 @@ function removeProfileImage() {
     }
 }
 
-
-/* ================================
-   COLLECT EDITABLE FIELDS
-================================ */
-
 function collectEditableFields() {
 
     const profile = getProfile();
-
-    /*
-       Only editable fields are updated here.
-
-       Protected fields such as:
-       - Full Name
-       - Role
-       - Designation
-       - Organization
-       - Employee ID
-       - Qualification
-       - Institution
-       - Passing Year
-
-       are intentionally NOT updated.
-    */
 
     // Contact
     profile.email = readField("email");
     profile.mobile = readField("mobile");
 
     // Professional details
-    profile.officeRegion =
-        readField("officeRegion");
-
-    profile.trainingExperience =
-        readField("trainingExperience");
-
-    profile.languages =
-        readField("languages");
+    profile.officeRegion = readField("officeRegion");
+    profile.trainingExperience = readField("trainingExperience");
+    profile.languages = readField("languages");
 
     // Competency mapping
-    profile.subjectExpertise =
-        readField("subjectExpertise");
-
-    profile.keySkills =
-        readField("keySkills");
-
-    profile.proficiencyLevel =
-        readField("proficiencyLevel");
-
-    profile.preferredMode =
-        readField("preferredMode");
+    profile.subjectExpertise = readField("subjectExpertise");
+    profile.keySkills = readField("keySkills");
+    profile.proficiencyLevel = readField("proficiencyLevel");
+    profile.preferredMode = readField("preferredMode");
 
     // Bio
     profile.bio = readField("bio");
+
+    // DO NOT change these:
+    // highestQualification
+    // institution
+    // passingYear
 
     return profile;
 }
