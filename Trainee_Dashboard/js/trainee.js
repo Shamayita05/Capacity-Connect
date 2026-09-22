@@ -15,7 +15,7 @@ function setupNavbar() {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
       localStorage.removeItem("capacity_trainee");
-      window.location.href = "index.html#login";
+      window.location.href = "../../Landing_Page/Landing_Page.html";
     });
   }
 }

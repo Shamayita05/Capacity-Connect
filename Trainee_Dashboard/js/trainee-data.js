@@ -4,12 +4,12 @@
 
 const DEFAULT_TRAINEE = {
   id: "trn_101",
-  name: "Rahul Sharma",
-  email: "rahul.sharma@example.com",
+  name: "Shirshika Ghosh",
+  email: "shirshika.03@example.com",
   phone: "+91 98765 43210",
-  profileImage: "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-File.png",
+  profileImage: "",
   about: "Enthusiastic computer science trainee eager to expand knowledge in data analysis and cybersecurity.",
-  qualification: "B.Tech Computer Science (3rd Year)",
+  qualification: "B.Tech Computer Science (4th Year)",
   skills: "Python, HTML/CSS, SQL, JavaScript",
   interests: "Data Science, Machine Learning, Web Development",
   enrolledCourses: ["course001", "course002"],
@@ -202,6 +202,6 @@ function showToast(message) {
 function checkSession() {
   const trainee = getCurrentTrainee();
   if (!trainee) {
-    window.location.href = "index.html#login";
+    window.location.href = "../../Landing_Page/Landing_Page.html";
   }
 }

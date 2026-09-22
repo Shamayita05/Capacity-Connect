@@ -43,7 +43,7 @@ var CC_QUOTES = [
 
 /* ------------------------------------------------------------ trainers -- */
 var CC_TRAINERS = [
-  { id: "t1", name: "Ananya Sharma" },
+  { id: "t1", name: "Shamayita Das" },
   { id: "t2", name: "Rahul Verma" },
   { id: "t3", name: "Priya Nair" },
   { id: "t4", name: "Imran Qureshi" },
@@ -432,15 +432,25 @@ function ccDefaultTrainee(name, email) {
     certificates: [],
   };
 }
-
 /* --------------------------------------------------------- data helpers -- */
 function getCurrentTrainee() {
-  return ccRead(CC_KEYS.trainee, null);
+  // 1. Try reading from both possible localStorage keys
+  var trainee = ccRead("capacity_trainee", null) || ccRead(CC_KEYS.trainee, null);
+
+  // 2. If no session exists, auto-initialize the default trainee (prevents redirect)
+  if (!trainee) {
+    trainee = ccDefaultTrainee();
+    saveCurrentTrainee(trainee);
+  }
+  return trainee;
 }
+
 function saveCurrentTrainee(trainee) {
+  ccWrite("capacity_trainee", trainee);
   ccWrite(CC_KEYS.trainee, trainee);
   return trainee;
 }
+
 function updateTrainee(changes) {
   var t = getCurrentTrainee();
   if (!t) return null;
@@ -449,38 +459,11 @@ function updateTrainee(changes) {
   });
   return saveCurrentTrainee(t);
 }
+
 function logoutTrainee() {
+  localStorage.removeItem("capacity_trainee");
   localStorage.removeItem(CC_KEYS.trainee);
   localStorage.removeItem(CC_KEYS.session);
-}
-
-function getAllCourses() {
-  return CC_COURSES;
-}
-function getCourseById(id) {
-  return CC_COURSES.filter(function (c) {
-    return c.id === id;
-  })[0] || null;
-}
-function getEnrolledCourses() {
-  var t = getCurrentTrainee();
-  if (!t) return [];
-  return (t.enrolledCourses || [])
-    .map(getCourseById)
-    .filter(Boolean);
-}
-function isEnrolled(courseId) {
-  var t = getCurrentTrainee();
-  return !!(t && (t.enrolledCourses || []).indexOf(courseId) > -1);
-}
-function enrollInCourse(courseId) {
-  var t = getCurrentTrainee();
-  if (!t) return false;
-  t.enrolledCourses = t.enrolledCourses || [];
-  if (t.enrolledCourses.indexOf(courseId) > -1) return false;
-  t.enrolledCourses.push(courseId);
-  saveCurrentTrainee(t);
-  return true;
 }
 
 /* ------------------------------------------------------------ progress --- */

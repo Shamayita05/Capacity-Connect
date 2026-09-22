@@ -112,7 +112,7 @@ function renderNavbar(active) {
     "</div></div></nav>";
   el("#cc-logout").addEventListener("click", function () {
     logoutTrainee();
-    window.location.href = "index.html#login";
+    window.location.href = "../../Landing_Page/Landing_Page.html";
   });
 }
 
@@ -130,7 +130,7 @@ function renderFooter() {
 function requireTrainee() {
   var t = getCurrentTrainee();
   if (!t) {
-    window.location.href = "index.html#login";
+    window.location.href = "feedback.html";
     return null;
   }
   return t;
