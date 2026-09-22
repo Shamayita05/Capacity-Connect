@@ -36,8 +36,18 @@ function renderDashboardData() {
   const nameElems = document.querySelectorAll(".trainee-name");
   nameElems.forEach(el => el.innerText = trainee.name);
 
-  const avatarElems = document.querySelectorAll(".trainee-avatar");
-  avatarElems.forEach(el => el.src = trainee.profileImage);
+const avatarElems = document.querySelectorAll(".trainee-avatar");
+
+avatarElems.forEach(el => {
+    const initials = trainee.name
+        .split(" ")
+        .map(name => name.charAt(0))
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
+
+    el.textContent = initials;
+});
 
   // Stats
   const courses = getCourses();
@@ -160,7 +170,15 @@ function openViewProfileModal() {
       </div>
       <div class="modal-body">
         <div style="text-align: center; margin-bottom: 20px;">
-          <img src="${t.profileImage}" class="avatar-lg" style="margin: 0 auto 10px auto;">
+          <div class="avatar-lg trainee-avatar"
+     style="margin: 0 auto 10px auto;">
+    ${t.name
+        .split(" ")
+        .map(name => name.charAt(0))
+        .join("")
+        .substring(0, 2)
+        .toUpperCase()}
+</div>
           <h2 style="font-size: 20px; color: var(--navy);">${t.name}</h2>
           <p style="font-size: 13px; color: var(--gray-600);">${t.qualification}</p>
         </div>
@@ -195,10 +213,6 @@ function openEditProfileModal() {
       </div>
       <div class="modal-body">
         <form id="edit-profile-form">
-          <div class="form-group">
-            <label>Profile Image URL</label>
-            <input type="text" id="edit-avatar" class="form-control" value="${t.profileImage}">
-          </div>
           <div class="form-group">
             <label>Email (Non-editable)</label>
             <input type="text" class="form-control" value="${t.email}" disabled>
@@ -236,7 +250,6 @@ function openEditProfileModal() {
 
 function saveProfileChanges() {
   const t = getCurrentTrainee();
-  t.profileImage = document.getElementById("edit-avatar").value;
   t.qualification = document.getElementById("edit-qual").value;
   t.skills = document.getElementById("edit-skills").value;
   t.interests = document.getElementById("edit-interests").value;

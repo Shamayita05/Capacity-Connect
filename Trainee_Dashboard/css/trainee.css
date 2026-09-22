@@ -798,3 +798,22 @@ body {
   .course-card-horizontal { flex-direction: column; align-items: flex-start; gap: 12px; }
   .progress-bar-wrap { width: 100%; }
 }
+
+.avatar-lg.trainee-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--navy);
+    color: white;
+
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    flex-shrink: 0;
+}
