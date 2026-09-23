@@ -13,32 +13,43 @@ function renderResources() {
   const tbody = document.getElementById("resources-table-body");
   if (!tbody) return;
 
-  const resources = JSON.parse(localStorage.getItem("capacity_resources")) || [];
-  const searchVal = document.getElementById("res-search")?.value.toLowerCase() || "";
-  const typeVal = document.getElementById("res-type-filter")?.value || "";
-
-  const filtered = resources.filter(r => {
-    const matchesSearch = r.title.toLowerCase().includes(searchVal) || r.courseName.toLowerCase().includes(searchVal);
-    const matchesType = typeVal === "" || r.type === typeVal;
-    return matchesSearch && matchesType;
-  });
-
-  if (filtered.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">No resources found.</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = filtered.map(r => `
+  tbody.innerHTML = `
     <tr>
-      <td><strong>${r.title}</strong></td>
-      <td>${r.courseName}</td>
-      <td>${r.trainer}</td>
-      <td><span class="tag">${r.type}</span></td>
+      <td><strong>Python Cheat Sheet PDF</strong></td>
+      <td>Python for Data Analysis</td>
+      <td>Ananya Sharma</td>
+      <td><span class="tag">PDF</span></td>
       <td>
-        <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px;" onclick="downloadResource('${r.title}')">View / Download</button>
+        <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px;" onclick="downloadResource('Python Cheat Sheet PDF')">
+          View / Download
+        </button>
       </td>
     </tr>
-  `).join("");
+
+    <tr>
+      <td><strong>Network Security Slides</strong></td>
+      <td>Cybersecurity Fundamentals</td>
+      <td>Shamayita Das</td>
+      <td><span class="tag">PPTX</span></td>
+      <td>
+        <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px;" onclick="downloadResource('Network Security Slides')">
+          View / Download
+        </button>
+      </td>
+    </tr>
+
+    <tr>
+      <td><strong>SQL Commands Reference</strong></td>
+      <td>Database Management Systems</td>
+      <td>Priya Nair</td>
+      <td><span class="tag">DOCX</span></td>
+      <td>
+        <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px;" onclick="downloadResource('SQL Commands Reference')">
+          View / Download
+        </button>
+      </td>
+    </tr>
+  `;
 }
 
 function setupResourceFilters() {
