@@ -40,8 +40,9 @@ function initFeedbackPage() {
 
   if (!courses || !courses.length) {
     courses = [
-      { id: "course001", name: "Web Development Fundamentals", trainer: "John Doe" },
-      { id: "course002", name: "UI/UX Design Masterclass", trainer: "Jane Smith" }
+    { id: "course001", name: "Cybersecurity Fundamentals", trainer: "Shamayita Das" },
+     { id: "course002", name: "Python for Data Analysis", trainer: "Ananya Sharma" },
+     { id: "course003", name: "Database Management Systems", trainer: "Priya Nair" }
     ];
   }
 
@@ -66,8 +67,9 @@ function onCourseChange() {
 
   // Fallback lookup if getCourseById returns null
   if (!c && courseId) {
-    if (courseId === "course001") c = { id: "course001", name: "Web Development Fundamentals", trainer: "John Doe" };
-    if (courseId === "course002") c = { id: "course002", name: "UI/UX Design Masterclass", trainer: "Jane Smith" };
+    if (courseId === "course001") c = { id: "course001", name: "Cybersecurity Fundamentals", trainer: "Shamayita Das" };
+    if (courseId === "course002") c = { id: "course002", name: "Python for Data Analysis", trainer: "Ananya Sharma" };
+    if (courseId === "course003") c = { id: "course003", name: "Database Management Systems", trainer: "Priya Nair" };
   }
 
   var trainerField = el("#fb-trainer");
