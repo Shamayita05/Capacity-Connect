@@ -374,15 +374,6 @@ function openCourseModal(courseId) {
         >
           Close
         </button>
-
-        <button
-          class="btn btn-accent"
-          ${isEnrolled ? "disabled" : ""}
-          onclick="closeModal(); confirmEnrollment('${course.id}');"
-        >
-          ${isEnrolled ? "Already Enrolled" : "Enroll Now"}
-        </button>
-
       </div>
 
     </div>
