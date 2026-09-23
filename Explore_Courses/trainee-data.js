@@ -102,7 +102,7 @@ const INITIAL_COURSES = [
 
 const INITIAL_RESOURCES = [
   { title: "Python Cheat Sheet PDF", courseId: "course001", courseName: "Python for Data Analysis", trainer: "Ananya Sharma", type: "PDF" },
-  { title: "Network Security Slides", courseId: "course002", courseName: "Cybersecurity Fundamentals", trainer: "Vikramaditya Roy", type: "PPTX" },
+  { title: "Network Security Slides", courseId: "course002", courseName: "Cybersecurity Fundamentals", trainer: "Shamayita Das ", type: "PPTX" },
   { title: "SQL Commands Reference", courseId: "course003", courseName: "Database Management Systems", trainer: "Priya Nair", type: "DOCX" }
 ];
 
