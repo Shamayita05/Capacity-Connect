@@ -59,7 +59,7 @@ const INITIAL_COURSES = [
     category: "Security",
     categories: ["Security", "Networking"],
     level: "Intermediate",
-    trainer: "Vikramaditya Roy",
+    trainer: "Shamayita Das",
     rating: 4.7,
     duration: "6 Weeks",
     description: "Learn core concepts of network security, threat modeling, and defensive architecture.",

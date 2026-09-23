@@ -98,7 +98,7 @@ var CC_COURSES = [
     category: "Security",
     categories: ["Security", "IT Operations"],
     level: "Intermediate",
-    trainer: "Imran Qureshi",
+    trainer: "Shamayita Das",
     rating: 4.6,
     duration: "6 Weeks",
     description:

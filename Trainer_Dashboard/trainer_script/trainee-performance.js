@@ -2,10 +2,10 @@
 let traineeData = [
     {
         id: "TR-101",
-        name: "Rahul Sharma",
-        email: "rahul.s@capacityconnect.org",
-        role: "Senior Operations Associate",
-        qualifications: "B.Tech in Civil Engg, 4 years Field Operations",
+        name: "Shirshika Ghosh",
+        email: "s.ghosh@capacityconnect.org",
+        role: "Software Associate",
+        qualifications: "B.Tech in Computer Science and Engineering",
         course: "Project Operations",
         mcqScore: 88,
         attempts: 1,
